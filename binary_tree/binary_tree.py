@@ -4,6 +4,7 @@ from node import Node
 class BinaryTree:
     def __init__(self):
         self.head = None
+        self.depth = 0
 
     def is_empty(self):
         return True if self.head is None else False
@@ -14,6 +15,8 @@ class BinaryTree:
             self.head = node
         else:
             self.find_position(node, self.head)
+
+        self.calculate_depth(self.head)
 
     def find_position(self, node: Node, current_node: Node):
         if node.value == current_node.value:
@@ -31,7 +34,6 @@ class BinaryTree:
                 self.find_position(node, current_node.left)
 
     def __contains__(self, item: int):
-        # node
         if self.is_empty():
             return False
         else:
@@ -45,4 +47,12 @@ class BinaryTree:
             return True
         else:
             return self.find(value, node.left) if value < node.value else self.find(value, node.right)
+
+    def calculate_depth(self, node: Node, depth: int=0):
+        if node is None:
+            if depth > self.depth:
+                self.depth = depth
+            return
+        self.calculate_depth(node.left, depth + 1)
+        self.calculate_depth(node.right, depth + 1)
 
