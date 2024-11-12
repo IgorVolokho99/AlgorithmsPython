@@ -1,17 +1,17 @@
 from binary_tree import BinaryTree
 
 
-b = BinaryTree()
-b.append(5)
-b.append(1)
-b.append(15)
-b.append(12)
-b.append(16)
-b.append(3)
-b.append(20)
-b.append(25)
-b.append(4)
+if __name__ == "__main__":
+    b = BinaryTree()
+    b.append(5)
+    b.append(1)
+    b.append(7)
+    b.append(4)
+    b.append(3)
+    b.append(9)
+    b.append(8)
+    b.append(18)
+    b.append(-5)
+    b.append(20)
 
-
-print(16 in b)
-print(b.depth)
+    b.print_binary_tree()
