@@ -1,7 +1,7 @@
 from binary_tree import BinaryTree
 
 
-if __name__ == "__main__":
+def main():
     b = BinaryTree()
     b.append(5)
     b.append(1)
@@ -14,4 +14,11 @@ if __name__ == "__main__":
     b.append(-5)
     b.append(20)
 
-    b.show_tree(b.root)
+    x = 5
+    print(x in b)
+    b.del_node(x)
+    print(x in b)
+
+
+if __name__ == "__main__":
+    main()
