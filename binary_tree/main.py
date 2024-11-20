@@ -14,4 +14,4 @@ if __name__ == "__main__":
     b.append(-5)
     b.append(20)
 
-    b.print_binary_tree()
+    print(b.root.right.right.left.value)

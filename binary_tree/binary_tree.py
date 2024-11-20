@@ -3,35 +3,43 @@ from node import Node
 
 class BinaryTree:
     def __init__(self):
-        self.head = None
+        self.root = None
         self.depth = 0
 
     def is_empty(self):
-        return True if self.head is None else False
+        return True if self.root is None else False
 
-    def append(self, value: int):
-        node = Node(value)
+    def __find(self, node: Node, parent: Node, value: int) -> tuple:
+        if node is None:
+            return None, parent, False
+
+        if value == node.value:
+            return node, parent, True
+
+        if value < node.value:
+            if node.left:
+                return self.__find(node.left, node, value)
+        if value > node.value:
+            if node.right:
+                return self.__find(node.right, node, value)
+
+        return node, parent, False
+
+    def append(self, value: int) -> Node:
+        obj = Node(value)
         if self.is_empty():
-            self.head = node
-        else:
-            self.find_position(node, self.head)
+            self.root = obj
+            return obj
 
-        self.calculate_depth(self.head)
+        n, p, fl_find = self.__find(self.root, None, obj.value)
 
-    def find_position(self, node: Node, current_node: Node):
-        if node.value == current_node.value:
-            return
-
-        if node.value > current_node.value:
-            if current_node.right is None:
-                current_node.right = node
+        if not fl_find and n:
+            if obj.value < n.value:
+                n.left = obj
             else:
-                self.find_position(node, current_node.right)
-        else:
-            if current_node.left is None:
-                current_node.left = node
-            else:
-                self.find_position(node, current_node.left)
+                n.right = obj
+
+        return obj
 
     def __contains__(self, item: int):
         if self.is_empty():
