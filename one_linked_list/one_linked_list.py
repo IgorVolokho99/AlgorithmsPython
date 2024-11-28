@@ -17,7 +17,7 @@ class OneLinkedList:
         self.head = node
         self.tail = node
 
-    def append(self, data: Any) -> None:
+    def push_back(self, data: Any) -> None:
         """Добавление элемента в односвязный список.
 
         Метод, принимающий на вход объект любого типа из которого формируется экземпляр класса Node и добавляется
@@ -31,3 +31,21 @@ class OneLinkedList:
         else:
             self.tail.next = node
             self.tail = self.tail.next
+
+    def pop_back(self):
+        if self.head is None:
+            raise IndexError("pop from empty one linked list")
+        elif self.head == self.tail:
+            value = self.head.value
+            self.head = self.tail = None
+            return value
+        else:
+            node = self.head
+            while node.next != self.tail:
+                node = node.next
+
+            value = node.next.value
+            self.tail = node
+            node.next = None
+
+            return value

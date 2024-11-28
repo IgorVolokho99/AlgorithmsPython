@@ -3,11 +3,14 @@ from one_linked_list import OneLinkedList
 
 def main():
     obj = OneLinkedList()
-    obj.append(1)
-    obj.append(5)
-    obj.append(2)
+    obj.push_back(1)
+    obj.push_back(5)
+    obj.push_back(2)
 
-    print(obj.head.next.next.value)
+    print(obj.pop_back())
+    print(obj.pop_back())
+    print(obj.pop_back())
+    print(obj.pop_back()) # Error
 
 
 if __name__ == "__main__":
