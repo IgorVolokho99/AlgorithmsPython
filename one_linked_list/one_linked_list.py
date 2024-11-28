@@ -17,6 +17,10 @@ class OneLinkedList:
         self.head = node
         self.tail = node
 
+    def is_empty(self) -> bool:
+        """Метод, выполняющий проверку пустоты односвязного списка."""
+        return True if self.head is None else False
+
     def push_back(self, data: Any) -> None:
         """Добавление элемента в односвязный список.
 
