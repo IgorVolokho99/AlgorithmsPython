@@ -61,6 +61,32 @@ class OneLinkedList:
 
             return value
 
+    def push_front(self, data: Any) -> None:
+        """Метод, который добавляет новый узел в начало списка.
+
+        :param data: добавляемое значение.
+        :return: None
+        """
+        new_node = Node(data)
+
+        if self.is_empty():
+            self.head = new_node
+            return
+
+        new_node.next = self.head
+        self.head = new_node
+
+    def pop_front(self) -> None:
+        """Метод, удаляющий первый узел списка.
+
+        Метод, который удаляет узел из начала односвязного списка.
+        Бросает исключение IndexError, если односвязный список пуст.
+        :return: None
+        """
+        if self.is_empty():
+            raise IndexError("List index out of range.")
+        self.head = self.head.next
+
     def insert(self, index: int, data: Any) -> None:
         """Метод, вставляющий значение на позицию index.
 
