@@ -60,3 +60,46 @@ class OneLinkedList:
             node.next = None
 
             return value
+
+    def insert(self, index: int, data: Any) -> None:
+        """Метод, вставляющий значение на позицию index.
+
+        Метод, который принимает data, создает объект Node со значением data и вставляет данный узел в позицию index.
+        Вызывается исключение IndexError, если указанного индекса не существуетю
+        :param index: позиция, на которую требуется вставить новый узел.
+        :param data: данные, которые будет содержать новый узел.
+        :return: None
+        """
+        if self.is_empty() and index == 0:
+            self.head = Node(data)
+            return
+        elif self.is_empty() and index > 0:
+            raise IndexError("List index out of range")
+        elif index == 0:
+            new_node = Node(data)
+            new_node.next = self.head
+            self.head = new_node
+            return
+
+        k = 0
+        current_node = self.head
+        while k != index - 1:
+            current_node = current_node.next
+            k += 1
+            if current_node is None:
+                raise IndexError("List index out of range")
+
+        new_node = Node(data)
+        new_node.next = current_node.next
+        current_node.next = new_node
+
+    def show(self) -> None:
+        """Выводит на экран односвязный список.
+
+        Итеративно перебирает узлы односвязного списка и выводит их на экран. Работает за O(n).
+        :return: None
+        """
+        node = self.head
+        while node is not None:
+            print(node.value)
+            node = node.next

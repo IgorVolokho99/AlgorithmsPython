@@ -7,10 +7,9 @@ def main():
     obj.push_back(5)
     obj.push_back(2)
 
-    print(obj.pop_back())
-    print(obj.pop_back())
-    print(obj.pop_back())
-    print(obj.pop_back()) # Error
+    obj.insert(0, 6)
+
+    obj.show()
 
 
 if __name__ == "__main__":
