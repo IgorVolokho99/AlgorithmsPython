@@ -2,8 +2,7 @@
 
 from typing import Any
 
-from node import Node
-
+from .node import Node
 
 class OneLinkedList:
     """Класс, реализующий односвязный список."""
@@ -26,8 +25,13 @@ class OneLinkedList:
 
         Метод, принимающий на вход объект любого типа из которого формируется экземпляр класса Node и добавляется
         в односвянзный список. В зависимости от того пуст список или нет объект может быть добавлен в атрибут head.
-        :param data: Объект любого типа.
-        :return: None
+
+        Args:
+            data: Объект любого типа.
+
+        Returns:
+            None.
+
         """
         node = Node(data)
         if self.head is None:
@@ -42,7 +46,10 @@ class OneLinkedList:
         Метод, который удаляет последний элемент с конца списка. В случае, если список пуст, то генерируется исключение
         IndexError. В случае, если список, состоит из одного элемента, то выполняется алгоритм ручного удаления за O(1).
         В остальных случаях выполняется поиск предпоследнего элемента и удаление следующего за ним за O(n).
-        :return: значение удаленного узла.
+
+        Returns:
+            Значение удаленного узла.
+
         """
         if self.head is None:
             raise IndexError("pop from empty one linked list")
@@ -64,8 +71,11 @@ class OneLinkedList:
     def push_front(self, data: Any) -> None:
         """Метод, который добавляет новый узел в начало списка.
 
-        :param data: добавляемое значение.
-        :return: None
+        Args:
+            data: добавляемое значение.
+
+        Returns:
+            None.
         """
         new_node = Node(data)
 
@@ -81,7 +91,10 @@ class OneLinkedList:
 
         Метод, который удаляет узел из начала односвязного списка.
         Бросает исключение IndexError, если односвязный список пуст.
-        :return: None
+
+        Returns:
+            None.
+
         """
         if self.is_empty():
             raise IndexError("List index out of range.")
@@ -92,9 +105,14 @@ class OneLinkedList:
 
         Метод, который принимает data, создает объект Node со значением data и вставляет данный узел в позицию index.
         Вызывается исключение IndexError, если указанного индекса не существуетю
-        :param index: позиция, на которую требуется вставить новый узел.
-        :param data: данные, которые будет содержать новый узел.
-        :return: None
+
+        Args:
+            index: позиция, на которую требуется вставить новый узел.
+            data: данные, которые будет содержать новый узел.
+
+        Returns:
+            None.
+
         """
         if self.is_empty() and index == 0:
             self.head = Node(data)
@@ -123,7 +141,10 @@ class OneLinkedList:
         """Выводит на экран односвязный список.
 
         Итеративно перебирает узлы односвязного списка и выводит их на экран. Работает за O(n).
-        :return: None
+
+        Returns:
+            None.
+
         """
         node = self.head
         while node is not None:
