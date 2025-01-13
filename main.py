@@ -1,13 +1,14 @@
-from one_linked_list import OneLinkedList
+from one_linked_list.one_linked_list import OneLinkedList
 
 
 def main():
     obj = OneLinkedList()
     obj.push_back(1)
     obj.push_back(5)
+    obj.push_back(7)
     obj.push_back(2)
 
-    obj.insert(0, 6)
+    obj.remove(8)
 
     obj.show()
 

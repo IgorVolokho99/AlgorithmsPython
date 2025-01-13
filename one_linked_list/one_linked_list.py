@@ -137,6 +137,32 @@ class OneLinkedList:
         new_node.next = current_node.next
         current_node.next = new_node
 
+    def remove(self, data: Any) -> None:
+        """Удаляет первый узел со значением data.
+
+        Args:
+            data: Значение, которое будет удалено из списка.
+
+        """
+        if self.is_empty():
+            raise ValueError("list.remove(x): x not in list")
+        if self.head.value == data:
+            self.pop_front()
+            return
+
+        current_node = self.head
+        while current_node.next is not None and current_node.next.value != data:
+            current_node = current_node.next
+
+        next_node = current_node.next
+        if next_node is None:
+            raise ValueError("list.remove(x): x not in list")
+        elif next_node is self.tail:
+            self.tail = current_node
+            self.tail.next = None
+        else:
+            current_node.next = next_node.next
+
     def show(self) -> None:
         """Выводит на экран односвязный список.
 
