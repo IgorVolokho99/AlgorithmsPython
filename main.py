@@ -10,7 +10,7 @@ def main():
 
     # obj.show()
 
-    print(obj.find(3))
+    print(obj.get(4))
 
 
 if __name__ == "__main__":

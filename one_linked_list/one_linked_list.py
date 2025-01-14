@@ -188,6 +188,32 @@ class OneLinkedList:
 
         return index
 
+    def get(self, index: int) -> Any:
+        """Возвращает значение элемента по указанному индексу.
+
+        Получает целочисленное значение, выступающее индексом списка и возвращает значение узла, которое находится
+        под указанным индексом. В случае, если указанного индекса не существует генерируется исключение.
+        Args:
+            index: Индекс узла значение которого будет возвращено.
+
+        Returns:
+            Any: Значение, которое будет возвращено.
+
+        """
+        if index < 0:
+            raise ValueError("List indexes must be positive integer.")
+
+        current_node = self.head
+        i = 0
+        while current_node and i < index:
+            current_node = current_node.next
+            i += 1
+
+        if current_node is None:
+            raise IndexError("List index out of range.")
+
+        return current_node.value
+
     def show(self) -> None:
         """Выводит на экран односвязный список.
 
