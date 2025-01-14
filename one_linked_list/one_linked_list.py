@@ -238,6 +238,19 @@ class OneLinkedList:
             raise IndexError("List index out of range.")
         current_node.value = data
 
+    def size(self) -> int:
+        """Возвращает количество узлов в списке.
+
+        Returns:
+            int: Количество узлов в списке.
+        """
+        counter = 0
+        current_node = self.head
+        while current_node:
+            current_node = current_node.next
+            counter += 1
+        return counter
+
     def show(self) -> None:
         """Выводит на экран односвязный список.
 
