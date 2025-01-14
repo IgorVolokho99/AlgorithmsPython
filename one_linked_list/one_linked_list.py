@@ -4,6 +4,7 @@ from typing import Any
 
 from .node import Node
 
+
 class OneLinkedList:
     """Класс, реализующий односвязный список."""
 
@@ -162,6 +163,30 @@ class OneLinkedList:
             self.tail.next = None
         else:
             current_node.next = next_node.next
+
+    def find(self, data: Any) -> int:
+        """Возвращает индекс первого узла со значением data и -1 в случае отсутствия.
+
+        Args:
+            data: Значение, по которому будет выполняться поиск.
+
+        Returns:
+            int: Индекс первого элемента со значением data и -1 в случае его отсуствия.
+
+        """
+
+        if self.is_empty():
+            return -1
+        current_node = self.head
+        index = 0
+        while current_node.value != data and current_node is not self.tail:
+            current_node = current_node.next
+            index += 1
+
+        if current_node.value != data:
+            return -1
+
+        return index
 
     def show(self) -> None:
         """Выводит на экран односвязный список.
