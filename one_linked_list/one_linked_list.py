@@ -214,6 +214,30 @@ class OneLinkedList:
 
         return current_node.value
 
+    def set(self, index: int, data: Any) -> None:
+        """Изменяет значение узла на указанной позиции.
+
+        Принимает целое неотрицательное число(индекс) и некоторое значение, которое будет сохранено в узел по указанной
+        позиции. В случае, если индекса не существует генерируется исключение Indexerror.
+        Args:
+            index: Индекс узла по которому будет происходить обновление значения.
+            data: Вставляемое значение.
+        """
+        if type(index) != int:
+            raise TypeError("List indexes must be integer.")
+        if index < 0:
+            raise ValueError("List indexes must be positive.")
+
+        current_node = self.head
+        i = 0
+        while current_node and i < index:
+            current_node = current_node.next
+            i += 1
+
+        if current_node is None:
+            raise IndexError("List index out of range.")
+        current_node.value = data
+
     def show(self) -> None:
         """Выводит на экран односвязный список.
 

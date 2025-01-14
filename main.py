@@ -8,9 +8,9 @@ def main():
     obj.push_back(1)
     obj.push_back(2)
 
-    # obj.show()
+    obj.set(-1, "A")
 
-    print(obj.get(4))
+    obj.show()
 
 
 if __name__ == "__main__":
