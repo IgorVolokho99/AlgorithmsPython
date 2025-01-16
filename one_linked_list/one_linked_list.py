@@ -84,7 +84,6 @@ class OneLinkedList:
             self.tail = self.head = new_node
             return
 
-
         new_node.next = self.head
         self.head = new_node
 
@@ -264,6 +263,12 @@ class OneLinkedList:
         return self.size()
 
     def __str__(self) -> str:
+        """Магический метод, возвращающий строковое удобочитаемое представление экземпляра класса.
+
+        Returns:
+            str: Строковое удобочитаемое представление экземпляра.
+
+        """
         if self.is_empty():
             return "one_linked_list(size=0)"
 

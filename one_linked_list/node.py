@@ -13,3 +13,17 @@ class Node:
         """
         self.value = value
         self.next = None
+
+    def __eq__(self, other) -> bool:
+        """Магический метод equal, испольщующий для сравнения двух экземпляров класса Node.
+
+        Проверяет на значение и тип атрибута value двух экземпляров класса.
+        Args:
+            other: True, в случае равенства объектов и False в противном случае.
+
+        Returns:
+
+        """
+        if self.value != other.value or not isinstance(self.value, type(other.value)):
+            return False
+        return True
