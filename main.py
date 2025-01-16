@@ -12,6 +12,14 @@ def main():
     print(obj)
     obj.reverse()
     print(obj)
+    obj.clear()
+    print(obj)
+    obj.push_back(1)
+    obj.push_back(2)
+    obj.push_back(3)
+    obj.push_back(4)
+    obj.push_back(5)
+    print(obj)
 
 
 if __name__ == "__main__":

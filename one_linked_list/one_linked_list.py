@@ -290,11 +290,18 @@ class OneLinkedList:
         """
         self_obj = OneLinkedList()
         current_node = self.head
+
         while current_node is not None:
             self_obj.push_front(current_node.value)
             current_node = current_node.next
+
         self.head = self_obj.head
         self.tail = self_obj.tail
+
+    def clear(self) -> None:
+        """Очищает экземпляр класса."""
+        while self.head is not None:
+            self.pop_front()
 
     def show(self) -> None:
         """Выводит на экран односвязный список.
