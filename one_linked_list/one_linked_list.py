@@ -81,8 +81,9 @@ class OneLinkedList:
         new_node = Node(data)
 
         if self.is_empty():
-            self.head = new_node
+            self.tail = self.head = new_node
             return
+
 
         new_node.next = self.head
         self.head = new_node
@@ -261,6 +262,21 @@ class OneLinkedList:
 
         """
         return self.size()
+
+    def __str__(self) -> str:
+        if self.is_empty():
+            return "one_linked_list(size=0)"
+
+        s = 'one_linked_list('
+        current_node = self.head
+        while current_node is not None:
+            if current_node is self.tail:
+                s += f"{self.tail.value})"
+            else:
+                s += f"{current_node.value}->"
+            current_node = current_node.next
+
+        return s
 
     def show(self) -> None:
         """Выводит на экран односвязный список.
