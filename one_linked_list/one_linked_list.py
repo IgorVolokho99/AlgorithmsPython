@@ -283,6 +283,19 @@ class OneLinkedList:
 
         return s
 
+    def reverse(self) -> None:
+        """Метод, который делает reverse односвязного списка.
+
+        Изменяется текущий экземпляр класса, а не возвращается новый.
+        """
+        self_obj = OneLinkedList()
+        current_node = self.head
+        while current_node is not None:
+            self_obj.push_front(current_node.value)
+            current_node = current_node.next
+        self.head = self_obj.head
+        self.tail = self_obj.tail
+
     def show(self) -> None:
         """Выводит на экран односвязный список.
 
