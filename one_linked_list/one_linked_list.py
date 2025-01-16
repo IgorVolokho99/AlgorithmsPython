@@ -303,16 +303,23 @@ class OneLinkedList:
         while self.head is not None:
             self.pop_front()
 
-    def show(self) -> None:
-        """Выводит на экран односвязный список.
+    def __eq__(self, other):
+        pass
 
-        Итеративно перебирает узлы односвязного списка и выводит их на экран. Работает за O(n).
+    def __iter__(self):
+        pass
 
-        Returns:
-            None.
+    def __contains__(self, item):
+        pass
 
-        """
-        node = self.head
-        while node is not None:
-            print(node.value)
-            node = node.next
+    def __getitem__(self, item):
+        pass
+
+    def __setitem__(self, key, value):
+        pass
+
+    def __delitem__(self, key):
+        pass
+
+    def __bool__(self):
+        pass
