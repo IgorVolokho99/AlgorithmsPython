@@ -3,9 +3,9 @@ from one_linked_list.one_linked_list import OneLinkedList
 
 def main():
     obj = OneLinkedList()
-    obj.push_back(1)
+    # obj.push_back(1)
 
-
+    print(len(obj))
     print(obj.size())
 
 
