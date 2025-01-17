@@ -24,6 +24,6 @@ class Node:
         Returns:
 
         """
-        if self.value != other.value or not isinstance(self.value, type(other.value)):
+        if not isinstance(other, Node) or not isinstance(self.value, type(other.value)) or self.value != other.value:
             return False
         return True

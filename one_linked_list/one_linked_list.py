@@ -304,7 +304,18 @@ class OneLinkedList:
             self.pop_front()
 
     def __eq__(self, other):
-        pass
+        if not isinstance(other, OneLinkedList):
+            return False
+        node_1 = self.head
+        node_2 = other.head
+        while node_1 is not None:
+            if node_1 != node_2 or node_2 is None:
+                return False
+            node_1 = node_1.next
+            node_2 = node_2.next
+        if node_2 is not None:
+            return False
+        return True
 
     def __iter__(self):
         pass
