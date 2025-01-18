@@ -266,6 +266,23 @@ class OneLinkedList:
         self.head = self_obj.head
         self.tail = self_obj.tail
 
+    def clear(self) -> None:
+        """Очищает экземпляр класса."""
+        while self.head is not None:
+            self.pop_front()
+
+    def extend(self, other) -> None:
+        """Метод, добавляющий все элементы списка other в конец экземпляра класса.
+
+        Raises:
+            TypeError: В случае, если other не является экземпляром класса OneLinkedList.
+        """
+        if not isinstance(other, OneLinkedList):
+            raise TypeError("OneLinkedList.extend(x). x must hase type OneLinkedList.")
+
+        for item in other:
+            self.push_back(item)
+
     def __len__(self) -> int:
         """Магический метод, возвращающий к-во элементов односвязного списка.
 
@@ -276,11 +293,6 @@ class OneLinkedList:
 
         """
         return self.size()
-
-    def clear(self) -> None:
-        """Очищает экземпляр класса."""
-        while self.head is not None:
-            self.pop_front()
 
     def __str__(self) -> str:
         """Магический метод, возвращающий строковое удобочитаемое представление экземпляра класса.
