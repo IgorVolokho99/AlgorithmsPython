@@ -355,8 +355,24 @@ class OneLinkedList:
         """
         return True if self.find(data) != -1 else False
 
-    def __getitem__(self, item):
-        pass
+    def __getitem__(self, index: int) -> Any:
+        """Магический метод, реализующий оператор взятия индекса [].
+
+        Args:
+            index: Индекс нужного элемента.
+
+        Returns:
+            Any: Значение узла по указанному индексу.
+
+        Raises:
+            TypeError: В случае, если получен index не типа данных int.
+            IndexError: В случае, если индекс является отрицательным целым числом или лежит вне имеющегося диапазона.
+
+        """
+        if not isinstance(index, int):
+            raise TypeError("list indices must be integers or slices, not float")
+        if index < 0:
+            raise IndexError("list indexes must be whole.")
 
     def __setitem__(self, key, value):
         pass
