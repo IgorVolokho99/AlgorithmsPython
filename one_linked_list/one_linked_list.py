@@ -374,11 +374,81 @@ class OneLinkedList:
         if index < 0:
             raise IndexError("list indexes must be whole.")
 
-    def __setitem__(self, key, value):
-        pass
+        current_node = self.head
+        current_index = 0
+        while current_index != index and current_node is not None:
+            current_node = current_node.next
+            current_index += 1
 
-    def __delitem__(self, key):
-        pass
+        if current_index != index or current_node is None:
+            raise IndexError("list index out of range.")
+
+        return current_node.value
+
+    def __setitem__(self, index: int, value: Any) -> None:
+        """Магический метод, реализующий присваивание по индексу.
+
+        Args:
+            index: Индекс, по которому требуется выполнить присваивание.
+            value: Значение, которое будет сохранено в узел по указаному индексу.
+
+        Raises:
+            TypeError: В случае, если получен index не типа данных int.
+            IndexError: В случае, если индекс является отрицательным целым числом или лежит вне имеющегося диапазона.
+
+        """
+        if not isinstance(index, int):
+            raise TypeError("list indices must be integers or slices, not float")
+        if index < 0:
+            raise IndexError("list indexes must be whole.")
+
+        current_node = self.head
+        current_index = 0
+        while current_index != index and current_node is not None:
+            current_node = current_node.next
+            current_index += 1
+
+        if current_index != index or current_node is None:
+            raise IndexError("list index out of range.")
+
+        current_node.value = value
+
+    def __delitem__(self, index: int) -> None:
+        """Магический метод, реализующий удаление по индексу.
+
+        Args:
+            index: Индекс узла, который требуется удалить.
+
+        Raises:
+            TypeError: В случае, если получен index не типа данных int.
+            IndexError: В случае, если индекс является отрицательным целым числом или лежит вне имеющегося диапазона.
+
+
+        """
+        if not isinstance(index, int):
+            raise TypeError("list indices must be integers or slices, not float")
+        if index < 0:
+            raise IndexError("list indexes must be whole.")
+        if self.is_empty():
+            raise IndexError("list index out of range.")
+        if index == 0:
+            self.pop_front()
+            return
+
+        current_node = self.head
+        current_index = 0
+        while current_index != index - 1 and current_node is not None:
+            current_node = current_node.next
+            current_index += 1
+
+        if current_index != index - 1 or current_node is None or current_node.next is None:
+            raise IndexError("list index out of range.")
+
+        if current_node.next is self.tail:
+            self.pop_back()
+            return
+
+        current_node.next = current_node.next.next
 
     def __bool__(self) -> bool:
         """Магический метод булевых операций.
