@@ -364,8 +364,16 @@ class OneLinkedList:
     def __delitem__(self, key):
         pass
 
-    def __bool__(self):
-        pass
+    def __bool__(self) -> bool:
+        """Магический метод булевых операций.
+
+        Метод, который используется для функции bool и использования экземлпяров класса в булевых выражениях. Реализует
+        логику Truthy и Falsy значений.
+        Returns:
+            bool: True, если значение экземпляра является Truthy и False в противном случае.
+
+        """
+        return False if self.is_empty() else True
 
     # def show(self) -> None:
     #     """Выводит на экран односвязный список.
