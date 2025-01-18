@@ -283,6 +283,29 @@ class OneLinkedList:
         for item in other:
             self.push_back(item)
 
+    def __add__(self, other):
+        """Метод, конкатенирующий два односвязных списка
+
+        Returns:
+            OneLinkedList: Односвязных список, в котором сначала идут все значения списка self, а потом все значения
+            списка other.
+
+        Raises:
+            TypeError: Если объект other не является экземпляром класса OneLinkedList.
+        """
+        if not isinstance(other, OneLinkedList):
+            raise TypeError(f"unsupported operand type(s) for +: 'OneLinkedList' and {type(other)}")
+
+        obj = OneLinkedList()
+
+        for item in self:
+            obj.push_back(item)
+
+        for item in other:
+            obj.push_back(item)
+
+        return obj
+
     def __len__(self) -> int:
         """Магический метод, возвращающий к-во элементов односвязного списка.
 
