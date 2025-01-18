@@ -303,7 +303,19 @@ class OneLinkedList:
 
         return s
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
+        """Магический метод, сравнивающий два экземпляра класса.
+
+        Проверяет тип элемента other, если это не объект класса OneLinkedList возвращает False, иначе итеративно прохо-
+        дит по каждому узлу self и other сравнивая их, если находит различие узлов возвращает False, иначе возвращает
+        True.
+        Args:
+            other: Объект OneLinkedList.
+
+        Returns:
+            bool: True, если объекты одинаковы и False в противном случае.
+
+        """
         if not isinstance(other, OneLinkedList):
             return False
         node_1 = self.head
@@ -317,8 +329,18 @@ class OneLinkedList:
             return False
         return True
 
-    def __iter__(self):
-        pass
+    def __iter__(self) -> Any:
+        """Магический метод, предназначенный для итерации по списку.
+
+        Генератор, который по очереди возвращает значение каждого узла начиная с head и заканчивая tail.
+        Yields:
+            Any: Значение узлов списка.
+
+        """
+        current_node = self.head
+        while current_node is not None:
+            yield current_node.value
+            current_node = current_node.next
 
     def __contains__(self, item):
         pass
@@ -334,3 +356,17 @@ class OneLinkedList:
 
     def __bool__(self):
         pass
+
+    # def show(self) -> None:
+    #     """Выводит на экран односвязный список.
+    #
+    #     Итеративно перебирает узлы односвязного списка и выводит их на экран. Работает за O(n).
+    #
+    #     Returns:
+    #         None.
+    #
+    #     """
+    #     node = self.head
+    #     while node is not None:
+    #         print(node.value)
+    #         node = node.next
