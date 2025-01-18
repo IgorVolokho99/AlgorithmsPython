@@ -342,8 +342,18 @@ class OneLinkedList:
             yield current_node.value
             current_node = current_node.next
 
-    def __contains__(self, item):
-        pass
+    def __contains__(self, data: Any) -> bool:
+        """Магический метод, проверяющий наличие значения data в списке.
+
+        Реализован при помощи метода find.
+        Args:
+            data: Искомое значение.
+
+        Returns:
+            bool: True, если такой элемент присутствует в списке и False в противном случае.
+
+        """
+        return True if self.find(data) != -1 else False
 
     def __getitem__(self, item):
         pass
