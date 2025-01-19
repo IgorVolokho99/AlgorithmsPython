@@ -283,6 +283,24 @@ class OneLinkedList:
         for item in other:
             self.push_back(item)
 
+    def __copy__(self):
+        """Магический метод, создающий поверхностную копию экземпляра класса.
+
+        Возвращает поверхностную копию экземпляра класса. Вызывается функцией copy модуля copy.
+        Returns:
+            OneLinkedList: Поверхностная копия экземпляра класса.
+
+        """
+        new_list = OneLinkedList()
+
+        for item in self:
+            new_list.push_back(item)
+
+        return new_list
+
+    def __deepcopy__(self, memodict={}):
+        pass
+
     def __add__(self, other):
         """Метод, конкатенирующий два односвязных списка
 
