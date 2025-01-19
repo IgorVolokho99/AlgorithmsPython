@@ -1,6 +1,7 @@
 """Модуль, содержащий в себе реализацию односвязного списка."""
 
 from typing import Any
+from copy import deepcopy
 
 from .node import Node
 
@@ -299,7 +300,23 @@ class OneLinkedList:
         return new_list
 
     def __deepcopy__(self, memodict={}):
-        pass
+        """Магический метод, создающий глубокую копию экземпляра класса.
+
+        Возвращает глубокую копию экземпляра класса. Вызывается функцией copy модуля copy.
+        Returns:
+            OneLinkedList: Глубокая копия экземпляра класса.
+
+        """
+        if id(self) in memodict:
+            return memodict[id(self)]
+
+        new_list = OneLinkedList()
+        memodict[id(self)] = new_list
+
+        for item in self:
+            new_list.push_back(deepcopy(item, memodict))
+
+        return new_list
 
     def __add__(self, other):
         """Метод, конкатенирующий два односвязных списка

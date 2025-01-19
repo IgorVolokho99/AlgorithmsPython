@@ -8,11 +8,11 @@ def main():
     obj.push_back(2)
     obj.push_back(3)
     obj.push_back(4)
-    obj.push_back([1, 2, 3])
+    obj.push_back([1, [1, 2], 3])
 
-    obj2 = copy(obj)
+    obj2 = deepcopy(obj)
 
-    obj[4][1] = 1232
+    obj[4][1][1] = 1232
 
     for item in obj2:
         print(item)
