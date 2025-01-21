@@ -530,17 +530,3 @@ class OneLinkedList:
 
         """
         return False if self.is_empty() else True
-
-    # def show(self) -> None:
-    #     """Выводит на экран односвязный список.
-    #
-    #     Итеративно перебирает узлы односвязного списка и выводит их на экран. Работает за O(n).
-    #
-    #     Returns:
-    #         None.
-    #
-    #     """
-    #     node = self.head
-    #     while node is not None:
-    #         print(node.value)
-    #         node = node.next
