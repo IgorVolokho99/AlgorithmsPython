@@ -3,7 +3,7 @@
 from typing import Any
 from copy import deepcopy
 
-from .node import Node
+from one_linked_list.node import Node
 
 
 class OneLinkedList:
