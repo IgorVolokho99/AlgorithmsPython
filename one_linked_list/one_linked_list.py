@@ -88,19 +88,28 @@ class OneLinkedList:
         new_node.next = self.head
         self.head = new_node
 
-    def pop_front(self) -> None:
+    def pop_front(self) -> Any:
         """Метод, удаляющий первый узел списка.
 
         Метод, который удаляет узел из начала односвязного списка.
         Бросает исключение IndexError, если односвязный список пуст.
 
         Returns:
-            None.
+            Any: Значение, первого узла.
+
+        Raises:
+            IndexError: В случае, если список пуст.
 
         """
         if self.is_empty():
             raise IndexError("List index out of range.")
+
+        value = self.head.value
         self.head = self.head.next
+        if self.head is None:
+            self.tail = None
+
+        return value
 
     def insert(self, index: int, data: Any) -> None:
         """Метод, вставляющий значение на позицию index.
