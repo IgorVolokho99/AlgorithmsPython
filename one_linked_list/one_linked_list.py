@@ -1,6 +1,6 @@
 """Модуль, содержащий в себе реализацию односвязного списка."""
 
-from typing import Any
+from typing import Any, Optional, Iterable
 from copy import deepcopy
 
 from one_linked_list.node import Node
@@ -9,14 +9,18 @@ from one_linked_list.node import Node
 class OneLinkedList:
     """Класс, реализующий односвязный список."""
 
-    def __init__(self, node: Node = None):
+    def __init__(self, iterable: Optional[Iterable[Any]] = None):
         """Конструктор класса OneLinkedList.
 
         Принимает необязателньый аргумент node, который по умолчанию сохраняется в атрибуты head и tail.
         :param node: Необязательный аргумент.
         """
-        self.head = node
-        self.tail = node
+        self.head = None
+        self.tail = None
+
+        if iterable:
+            for item in iterable:
+                self.push_back(item)
 
     def is_empty(self) -> bool:
         """Метод, выполняющий проверку пустоты односвязного списка."""
@@ -384,6 +388,9 @@ class OneLinkedList:
             current_node = current_node.next
 
         return s
+
+    def __repr__(self):
+        return f"OneLinkedList({list(self)})"
 
     def __eq__(self, other) -> bool:
         """Магический метод, сравнивающий два экземпляра класса.
