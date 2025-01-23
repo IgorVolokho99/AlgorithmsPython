@@ -8,12 +8,11 @@ def main():
     for item in obj:
         print(item)
 
-    s = repr(obj)
+    print('-------------')
 
-    obj2 = eval(s)
-
-    for item in obj2:
+    for item in reversed(obj):
         print(item)
+
 
 if __name__ == "__main__":
     main()

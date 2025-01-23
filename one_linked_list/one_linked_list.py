@@ -425,6 +425,25 @@ class OneLinkedList:
             return False
         return True
 
+    def __reversed__(self) -> Any:
+        """Магический метод, представляющий из себя генератор для итерирования элементов в обратном порядке.
+
+        Реализация данного метода позволяет передавать объекты функции reversed для итерации по элементам списка в
+        обратном порядке.
+
+        Yields:
+            Any: Значения узлов списка, начиная с конца.
+
+        """
+        stack = []
+        current_node = self.head
+        while current_node is not None:
+            stack.append(current_node.value)
+            current_node = current_node.next
+
+        while stack:
+            yield stack.pop()
+
     def __iter__(self) -> Any:
         """Магический метод, предназначенный для итерации по списку.
 
