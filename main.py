@@ -8,13 +8,10 @@ def main():
     obj.push_back(2)
     obj.push_back(3)
     obj.push_back(4)
-    obj.push_back([1, [1, 2], 3])
+    obj.reverse()
 
-    obj2 = deepcopy(obj)
 
-    obj[4][1][1] = 1232
-
-    for item in obj2:
+    for item in obj:
         print(item)
 
 

@@ -264,20 +264,37 @@ class OneLinkedList:
             counter += 1
         return counter
 
+    # def reverse(self) -> None:
+    #     """Метод, который делает reverse односвязного списка.
+    #
+    #     Изменяется текущий экземпляр класса, а не возвращается новый.
+    #     """
+    #     self_obj = OneLinkedList()
+    #     current_node = self.head
+    #
+    #     while current_node is not None:
+    #         self_obj.push_front(current_node.value)
+    #         current_node = current_node.next
+    #
+    #     self.head = self_obj.head
+    #     self.tail = self_obj.tail
+
     def reverse(self) -> None:
         """Метод, который делает reverse односвязного списка.
 
         Изменяется текущий экземпляр класса, а не возвращается новый.
         """
-        self_obj = OneLinkedList()
+        prev = None
         current_node = self.head
+        self.tail = self.head
 
         while current_node is not None:
-            self_obj.push_front(current_node.value)
-            current_node = current_node.next
+            next_node = current_node.next
+            current_node.next = prev
+            prev = current_node
+            current_node = next_node
 
-        self.head = self_obj.head
-        self.tail = self_obj.tail
+        self.head = prev
 
     def clear(self) -> None:
         """Очищает экземпляр класса."""
