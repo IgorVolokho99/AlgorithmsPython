@@ -134,9 +134,7 @@ class OneLinkedList:
         elif self.is_empty() and index > 0:
             raise IndexError("List index out of range")
         elif index == 0:
-            new_node = Node(data)
-            new_node.next = self.head
-            self.head = new_node
+            self.push_front(data)
             return
 
         k = 0
@@ -263,21 +261,6 @@ class OneLinkedList:
             current_node = current_node.next
             counter += 1
         return counter
-
-    # def reverse(self) -> None:
-    #     """Метод, который делает reverse односвязного списка.
-    #
-    #     Изменяется текущий экземпляр класса, а не возвращается новый.
-    #     """
-    #     self_obj = OneLinkedList()
-    #     current_node = self.head
-    #
-    #     while current_node is not None:
-    #         self_obj.push_front(current_node.value)
-    #         current_node = current_node.next
-    #
-    #     self.head = self_obj.head
-    #     self.tail = self_obj.tail
 
     def reverse(self) -> None:
         """Метод, который делает reverse односвязного списка.
