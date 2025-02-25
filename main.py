@@ -1,17 +1,17 @@
 from one_linked_list.one_linked_list import OneLinkedList
-from copy import copy, deepcopy
+from two_linked_list.two_linked_list import TwoLinkedList
 
 
 def main():
-    obj = OneLinkedList([1, 2, 3])
+    obj = TwoLinkedList()
 
-    for item in obj:
-        print(item)
+    obj.push_back(2)
+    obj.push_back(2)
+    obj.push_back(2)
 
-    print('-------------')
-
-    for item in reversed(obj):
-        print(item)
+    print(obj.head.value)
+    print(obj.head.next.value)
+    print(obj.head.next.next.value)
 
 
 if __name__ == "__main__":

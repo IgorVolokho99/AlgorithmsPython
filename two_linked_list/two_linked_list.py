@@ -1,3 +1,8 @@
+from typing import Any
+
+from two_linked_list.node import Node
+
+
 class TwoLinkedList:
     def __init__(self):
         self.head = None
@@ -12,8 +17,21 @@ class TwoLinkedList:
         """
         return self.head is None
 
-    def push_back(self):
-        pass
+    def push_back(self, value: Any) -> None:
+        """Метод, добавляющий значение в конец списка.
+
+        Создает объект типа Node, который инициализируем значением value и добавляем в конец списка, изменяя
+        значение tail.
+        Args:
+            value: значение, которое будет добавлено в конец списка.
+
+        """
+        new_node = Node(value)
+        if not self.is_empty():
+            self.tail.next = new_node
+            self.tail = self.tail.next
+        else:
+            self.head = self.tail = new_node
 
     def pop_back(self):
         pass
