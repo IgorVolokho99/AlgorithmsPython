@@ -33,8 +33,27 @@ class TwoLinkedList:
         else:
             self.head = self.tail = new_node
 
-    def pop_back(self):
-        pass
+    def pop_back(self) -> Any:
+        """Метод, удаляющий последний элемент списка.
+
+        Происходит проверка, что список пуст и если так, то генерируем исключение IndexError. В случае, если список
+        состоит только из одного элемента, то главным узлам head и tail присваиваем None. Иначе просто сдвигаем
+        указатель tail на один узел влево. Во всех случаях возвращаем значение удаляемого узла.
+        Returns:
+            Any: значение удаляемого узла.
+
+        """
+        if self.is_empty():
+            raise IndexError("Pop from empty list.")
+        if self.head is self.tail:
+            pop_value = self.head
+            self.head = self.tail = None
+            return pop_value
+        else:
+            pop_value = self.tail.value
+            prev_node = self.tail.prev
+            self.tail = prev_node
+            return pop_value
 
     def push_front(self):
         pass
