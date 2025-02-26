@@ -52,8 +52,8 @@ class TwoLinkedList:
             return pop_value
         else:
             pop_value = self.tail.value
-            prev_node = self.tail.prev
-            self.tail = prev_node
+            self.tail = self.tail.prev
+            self.tail.next = None
             return pop_value
 
     def push_front(self, value: Any) -> None:
@@ -73,8 +73,27 @@ class TwoLinkedList:
         self.head.prev = new_node
         self.head = self.head.prev
 
-    def pop_front(self):
-        pass
+    def pop_front(self) -> Any:
+        """Метод, удаляющий первый элемент списка.
+
+        Происходит проверка, что список пуст и если так, то генерируем исключение IndexError. В случае, если список
+        состоит только из одного элемента, то главным узлам head и tail присваиваем None. Иначе просто сдвигаем
+        указатель head на один узел вправо. Во всех случаях возвращаем значение удаляемого узла.
+        Returns:
+            Any: значение удаляемого узла.
+
+        """
+        if self.is_empty():
+            raise IndexError("Pop from empty list.")
+        if self.head is self.tail:
+            pop_value = self.head.value
+            self.head = self.tail = None
+            return pop_value
+        else:
+            pop_value = self.head.value
+            self.head = self.head.next
+            self.head.prev = None
+            return pop_value
 
     def insert(self):
         pass
