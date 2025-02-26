@@ -29,6 +29,7 @@ class TwoLinkedList:
         new_node = Node(value)
         if not self.is_empty():
             self.tail.next = new_node
+            new_node.prev = self.tail
             self.tail = self.tail.next
         else:
             self.head = self.tail = new_node
@@ -55,8 +56,22 @@ class TwoLinkedList:
             self.tail = prev_node
             return pop_value
 
-    def push_front(self):
-        pass
+    def push_front(self, value: Any) -> None:
+        """Метод, добавляющий значение в начало списка.
+
+        Создает обьект типа Node, который инициализируется значением value. Если список пуст, то делаем новый узел
+        значением head и tail, иначе - обновлям значение head, указывая next и prev связи.
+        Args:
+            value: значение, которое будет добавлено в начало списка.
+
+        """
+        if self.is_empty():
+            self.head = self.tail = Node(value)
+            return
+        new_node = Node(value)
+        new_node.next = self.head
+        self.head.prev = new_node
+        self.head = self.head.prev
 
     def pop_front(self):
         pass
