@@ -122,8 +122,33 @@ class TwoLinkedList:
         new_node.next = next_node
         new_node.prev = new_node
 
-    def remove(self):
-        pass
+    def remove(self, value: Any):
+        """Метод, удаляющий первый узел со значение value из списка.
+
+        Идем по списку, начиная с head и до узла со значением value(или None). Если дошли до конца списка(None), то
+        генерируем исключение ValueError, игаче удаляем узел, который был получен в процессе поиска(с проверкой на
+        удаление head или tail).
+        Args:
+            value: Значение узла, который нужно удалить.
+
+        """
+        current_node = self.head
+
+        while current_node and current_node.value != value:
+            current_node = current_node.next
+
+        if current_node is None:
+            raise ValueError("list.remove(x): x not in list.")
+
+        if current_node is self.head:
+            self.pop_front()
+        elif current_node is self.tail:
+            self.pop_back()
+        else:
+            next_node = current_node.next
+            prev_node = current_node.prev
+            prev_node.next = next_node
+            next_node.prev = prev_node
 
     def find(self):
         pass
