@@ -9,14 +9,12 @@ def main():
     obj.push_back(2)
     obj.push_back(3)
 
-
-    obj.push_front(10)
+    obj.insert(2, 10)
 
     print(obj.head.value)
     print(obj.head.next.value)
-    print(obj.head.next.prev.value)
     print(obj.head.next.next.value)
-
+    print(obj.tail.value)
 
 if __name__ == "__main__":
     main()

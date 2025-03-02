@@ -95,8 +95,32 @@ class TwoLinkedList:
             self.head.prev = None
             return pop_value
 
-    def insert(self):
-        pass
+    def insert(self, index: int, value: Any):
+        if index >= self.size():
+            raise IndexError("List index out of range.")
+        if index == 0:
+            self.push_front(value)
+            return
+
+        current_node = self.head
+        current_index = 0
+        while current_index != index - 1:
+            current_node = current_node.next
+            current_index += 1
+
+        if current_node is self.tail:
+            self.push_back(value)
+            return
+
+        prev_node = current_node
+        next_node = current_node.next
+        new_node = Node(value)
+
+        prev_node.next = new_node
+        new_node.prev = prev_node
+
+        new_node.next = next_node
+        new_node.prev = new_node
 
     def remove(self):
         pass
