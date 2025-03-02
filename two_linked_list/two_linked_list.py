@@ -110,8 +110,23 @@ class TwoLinkedList:
     def set(self):
         pass
 
-    def size(self):
-        pass
+    def size(self) -> int:
+        """Метод, возвращающий длину списка.
+
+        Начинаем идти по узлам от head до тех пор, пока не достигнем узла со значением None, параллельно с этим
+        инкрементируем переменную size и возвращаем её в конце.
+        Returns:
+            int: Размер списка.
+
+        """
+        current_node = self.head
+        size = 0
+
+        while current_node is not None:
+            current_node = current_node.next
+            size += 1
+
+        return size
 
     def reverse(self):
         pass
