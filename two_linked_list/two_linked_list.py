@@ -150,8 +150,29 @@ class TwoLinkedList:
             prev_node.next = next_node
             next_node.prev = prev_node
 
-    def find(self):
-        pass
+    def find(self, value: Any) -> int:
+        """Возвращает индекс первого узла со значением data и -1 в случае отсутствия.
+
+        Args:
+            data: Значение, по которому будет выполняться поиск.
+
+        Returns:
+            int: Индекс первого элемента со значением data и -1 в случае его отсуствия.
+
+        """
+        if self.is_empty():
+            return -1
+
+        current_node = self.head
+        current_index = 0
+        while current_node.value != value:
+            current_node = current_node.next
+            current_index += 1
+
+        if current_node.value != value:
+            return -1
+
+        return current_index
 
     def get(self):
         pass
