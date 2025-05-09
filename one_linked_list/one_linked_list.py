@@ -427,6 +427,7 @@ class OneLinkedList:
         """
         if not isinstance(other, OneLinkedList):
             return False
+
         node_1 = self.head
         node_2 = other.head
         while node_1 is not None:
@@ -434,8 +435,10 @@ class OneLinkedList:
                 return False
             node_1 = node_1.next
             node_2 = node_2.next
+
         if node_2 is not None:
             return False
+
         return True
 
     def __reversed__(self) -> Any:
