@@ -1,6 +1,6 @@
 """Модуль, который предоставляет реализацию стандартной структуры двухсвязного списка."""
 
-from typing import Any
+from typing import Any, Optional, Iterable
 
 from two_linked_list.node import Node
 
@@ -8,10 +8,14 @@ from two_linked_list.node import Node
 class TwoLinkedList:
     """Класс, который предоставляет реализацию стандартной структуры двухсвязного списка."""
 
-    def __init__(self) -> None:
+    def __init__(self, iterable: Optional[Iterable[Any]]) -> None:
         """Инициализирует объекты данного класса, задаются два пустыл атрибута head и tail."""
         self.head = None
         self.tail = None
+
+        if Iterable:
+            for item in iterable:
+                self.push_back(item)
 
     def is_empty(self) -> bool:
         """Метод, проверяющий является ли список пуст.
