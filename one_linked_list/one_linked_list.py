@@ -62,20 +62,21 @@ class OneLinkedList:
         """
         if self.head is None:
             raise IndexError("pop from empty one linked list")
-        elif self.head == self.tail:
+
+        if self.head == self.tail:
             value = self.head.value
             self.head = self.tail = None
             return value
-        else:
-            node = self.head
-            while node.next != self.tail:
-                node = node.next
 
-            value = node.next.value
-            self.tail = node
-            node.next = None
+        node = self.head
+        while node.next != self.tail:
+            node = node.next
 
-            return value
+        value = node.next.value
+        self.tail = node
+        node.next = None
+
+        return value
 
     def push_front(self, data: Any) -> None:
         """Метод, который добавляет новый узел в начало списка.
@@ -83,8 +84,6 @@ class OneLinkedList:
         Args:
             data: добавляемое значение.
 
-        Returns:
-            None.
         """
         new_node = Node(data)
 
@@ -135,9 +134,11 @@ class OneLinkedList:
         if self.is_empty() and index == 0:
             self.head = Node(data)
             return
-        elif self.is_empty() and index > 0:
+
+        if self.is_empty() and index > 0:
             raise IndexError("List index out of range")
-        elif index == 0:
+
+        if index == 0:
             self.push_front(data)
             return
 
@@ -173,7 +174,8 @@ class OneLinkedList:
         next_node = current_node.next
         if next_node is None:
             raise ValueError("list.remove(x): x not in list")
-        elif next_node is self.tail:
+
+        if next_node is self.tail:
             self.tail = current_node
             self.tail.next = None
         else:
@@ -189,7 +191,6 @@ class OneLinkedList:
             int: Индекс первого элемента со значением data и -1 в случае его отсуствия.
 
         """
-
         if self.is_empty():
             return -1
         current_node = self.head
@@ -208,6 +209,7 @@ class OneLinkedList:
 
         Получает целочисленное значение, выступающее индексом списка и возвращает значение узла, которое находится
         под указанным индексом. В случае, если указанного индекса не существует генерируется исключение.
+
         Args:
             index: Индекс узла значение которого будет возвращено.
 
@@ -234,11 +236,13 @@ class OneLinkedList:
 
         Принимает целое неотрицательное число(индекс) и некоторое значение, которое будет сохранено в узел по указанной
         позиции. В случае, если индекса не существует генерируется исключение Indexerror.
+
         Args:
             index: Индекс узла по которому будет происходить обновление значения.
             data: Вставляемое значение.
+
         """
-        if type(index) != int:
+        if not isinstance(index, int):
             raise TypeError("List indexes must be integer.")
         if index < 0:
             raise ValueError("List indexes must be positive.")
@@ -258,6 +262,7 @@ class OneLinkedList:
 
         Returns:
             int: Количество узлов в списке.
+
         """
         counter = 0
         current_node = self.head
@@ -288,11 +293,12 @@ class OneLinkedList:
         while self.head is not None:
             self.pop_front()
 
-    def extend(self, other) -> None:
+    def extend(self, other) -> None:  # noqa: ANN001
         """Метод, добавляющий все элементы списка other в конец экземпляра класса.
 
         Raises:
             TypeError: В случае, если other не является экземпляром класса OneLinkedList.
+
         """
         if not isinstance(other, OneLinkedList):
             raise TypeError("OneLinkedList.extend(x). x must hase type OneLinkedList.")
@@ -304,6 +310,7 @@ class OneLinkedList:
         """Магический метод, создающий поверхностную копию экземпляра класса.
 
         Возвращает поверхностную копию экземпляра класса. Вызывается функцией copy модуля copy.
+
         Returns:
             OneLinkedList: Поверхностная копия экземпляра класса.
 
@@ -315,10 +322,11 @@ class OneLinkedList:
 
         return new_list
 
-    def __deepcopy__(self, memodict={}):
+    def __deepcopy__(self, memodict: dict = {}): # noqa: B006
         """Магический метод, создающий глубокую копию экземпляра класса.
 
         Возвращает глубокую копию экземпляра класса. Вызывается функцией copy модуля copy.
+
         Returns:
             OneLinkedList: Глубокая копия экземпляра класса.
 
@@ -334,8 +342,8 @@ class OneLinkedList:
 
         return new_list
 
-    def __add__(self, other):
-        """Метод, конкатенирующий два односвязных списка
+    def __add__(self, other):  # noqa: ANN001
+        """Метод, конкатенирующий два односвязных списка.
 
         Returns:
             OneLinkedList: Односвязных список, в котором сначала идут все значения списка self, а потом все значения
@@ -343,6 +351,7 @@ class OneLinkedList:
 
         Raises:
             TypeError: Если объект other не является экземпляром класса OneLinkedList.
+
         """
         if not isinstance(other, OneLinkedList):
             raise TypeError(f"unsupported operand type(s) for +: 'OneLinkedList' and {type(other)}")
@@ -362,6 +371,7 @@ class OneLinkedList:
 
         Магический метод, который возвращает к-во элементов односвязного списка. Делает совместимым экземпляры данного
         класса с функцией len.
+
         Returns:
             int: количество элементов односвязного списка.
 
@@ -394,17 +404,20 @@ class OneLinkedList:
 
         Данный метод позволяет восстановить точную копию экземпляра при помощи функции eval и строки, возвращающейся
         текущим методом.
+
         Returns:
             str: Официальное представление экземпляра класса.
+
         """
         return f"OneLinkedList({list(self)})"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: Any) -> bool:
         """Магический метод, сравнивающий два экземпляра класса.
 
         Проверяет тип элемента other, если это не объект класса OneLinkedList возвращает False, иначе итеративно прохо-
         дит по каждому узлу self и other сравнивая их, если находит различие узлов возвращает False, иначе возвращает
         True.
+
         Args:
             other: Объект OneLinkedList.
 
@@ -448,6 +461,7 @@ class OneLinkedList:
         """Магический метод, предназначенный для итерации по списку.
 
         Генератор, который по очереди возвращает значение каждого узла начиная с head и заканчивая tail.
+
         Yields:
             Any: Значение узлов списка.
 
@@ -461,6 +475,7 @@ class OneLinkedList:
         """Магический метод, проверяющий наличие значения data в списке.
 
         Реализован при помощи метода find.
+
         Args:
             data: Искомое значение.
 
@@ -570,6 +585,7 @@ class OneLinkedList:
 
         Метод, который используется для функции bool и использования экземлпяров класса в булевых выражениях. Реализует
         логику Truthy и Falsy значений.
+
         Returns:
             bool: True, если значение экземпляра является Truthy и False в противном случае.
 
