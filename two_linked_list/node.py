@@ -19,3 +19,17 @@ class Node:
         self.value = value
         self.next = None
         self.prev = None
+
+    def __eq__(self, other) -> bool: # noqa: ANN001
+        """Сравнивает два объекта типа Node. Сравнение ведется только по атрибуту value.
+
+        Args:
+            other: Объект типа Node с которым происходит сравнение текущего объекта.
+
+        Returns:
+            bool: True, если объекты равны и False в противеом случае.
+
+        """
+        if not isinstance(other, Node):
+            return False
+        return True if self.value == other.value else False
