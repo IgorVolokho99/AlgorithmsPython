@@ -32,4 +32,4 @@ class Node:
         """
         if not isinstance(other, Node):
             return False
-        return True if self.value == other.value else False
+        return True if isinstance(self.value, type(other.value)) and self.value == other.value else False

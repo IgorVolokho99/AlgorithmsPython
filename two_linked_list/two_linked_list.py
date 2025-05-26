@@ -227,8 +227,21 @@ class TwoLinkedList:
 
         return current_node.value
 
-    # def set(self):
-    #     pass
+    def set(self, index: int, value: Any) -> None:
+        if not isinstance(index, int) or isinstance(index, bool):
+            raise TypeError("List indexes must be integer.")
+        if index < 0:
+            raise ValueError("List indexes must be not negative.")
+
+        current_index = 0
+        current_node = self.head
+        while current_index < index and current_node:
+            current_index += 1
+            current_node = current_node.next
+
+        if current_node is None:
+            raise IndexError("List index out of range.")
+        current_node.value = value
 
     def size(self) -> int:
         """Метод, возвращающий длину списка.
@@ -275,10 +288,30 @@ class TwoLinkedList:
     #
     # def __repr__(self):
     #     pass
-    #
-    # def __eq__(self, other):
-    #     pass
-    #
+
+    def __eq__(self, other) -> bool:  # noqa: ANN001
+        """Сравнивает два объекта типа TwoLinkedList.
+
+        Args:
+            other(TwoLinkedList): Объект с которым будет происходит сравнение текущего объекта класса.
+
+        Returns:
+            bool: True, в случае, если сравниваемые объекты равны и False в противном случае.
+
+        """
+        if not isinstance(other, TwoLinkedList):
+            return False
+
+        node_1 = self.head
+        node_2 = other.head
+        while node_1 is not None and node_2 is not None:
+            if node_1 != node_2:
+                return False
+            node_1 = node_1.next
+            node_2 = node_2.next
+
+        return True if node_1 is None and node_2 is None else False
+
     # def __reversed__(self):
     #     pass
     #
