@@ -228,6 +228,27 @@ class TwoLinkedList:
         return current_node.value
 
     def set(self, index: int, value: Any) -> None:
+        """Добавляет значение value на позицию index в списке.
+
+        Получает целочисленный параметр index, и новое значение узла value.
+        Выбрасываются следующие исключения:
+        - TypeError, если параметр index не является типом int;
+        - ValuError, если index является отрицательным числом;
+        - IndeError, если index выходит за пределы максимального индекса.
+        В остальных случаях срабатывает сохранение значение value на позицию index в списке.
+        Оценка сложности по времени: O(n);
+        Оценка сложности по памяти: O(1);
+
+        Args:
+            index(int): Позиция, на которую требуется вставить новое значение;
+            value(Any): Значение, которое требуется поставить на позицию.
+
+        Examples:
+            >>> two_linked_list = TwoLinkedList([1, 2, 3, 4, 5])
+            >>> two_linked_list.set(0, 10)
+            >>> print(two_linked_list.get(0)) # Выведет 10
+
+        """
         if not isinstance(index, int) or isinstance(index, bool):
             raise TypeError("List indexes must be integer.")
         if index < 0:
