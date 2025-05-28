@@ -288,6 +288,7 @@ class TwoLinkedList:
 
         Оценка сложности по времени: O(n);
         Оценка сложности по памяти: O(1);
+
         Examples:
             >>> two_linked_list = TwoLinkedList([1, 2, 3, 4, 5])
             >>> two_linked_list.reverse()
@@ -352,9 +353,28 @@ class TwoLinkedList:
 
         return True if node_1 is None and node_2 is None else False
 
-    # def __reversed__(self):
-    #     pass
-    #
+    def __reversed__(self) -> None:
+        """Магический метод, представляющий из себя генератор для итерирования элементов в обратном порядке.
+
+        Реализация данного метода позволяет передавать объекты функции reversed для итерации по элементам списка в
+        обратном порядке.
+        Оценка сложности по времени: O(n);
+        Оценка сложности по памяти: O(1);
+
+        Examples:
+            >>> two_linked_list = TwoLinkedList([1, 2, 3, 4, 5])
+            >>> for i in reversed(two_linked_list):
+            ...     print(i) # -> 5 4 3 2 1
+
+        Yields:
+            Any: Значения узлов списка, начиная с конца.
+
+        """
+        current_node = self.tail
+        while current_node:
+            yield current_node.value
+            current_node = current_node.prev
+
     # def __iter__(self):
     #     pass
     #
