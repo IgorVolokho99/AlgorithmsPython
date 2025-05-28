@@ -326,8 +326,15 @@ class TwoLinkedList:
     # def __len__(self):
     #     pass
     #
-    # def __str__(self):
-    #     pass
+    def __str__(self) -> str:
+        """Магический метод, который возвращает человекочитабельное представление списка.
+
+        Returns:
+            str: Строка вида [1, 2, 3, 4, 5], которая описывает содержимое двухсвязного списка.
+
+        """
+        return f"[{', '.join([str(value) for value in self])}]"
+
     #
     # def __repr__(self):
     #     pass
