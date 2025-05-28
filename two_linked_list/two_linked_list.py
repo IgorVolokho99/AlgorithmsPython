@@ -377,8 +377,23 @@ class TwoLinkedList:
             yield current_node.value
             current_node = current_node.prev
 
-    # def __iter__(self):
-    #     pass
+    def __iter__(self) -> Any:
+        """Магический метод, который реализует итерацию по экземпляру двухсвязного списка.
+
+        Yields:
+            Any: Значения узлов двухсвязного списка.
+
+        Examples:
+            >>> two_linked_list = TwoLinkedList([1, 2, 3, 4, 5])
+            >>> for value in two_linked_list:
+            ...     print(value) # -> 1, 2, 3, 4, 5
+
+        """
+        current_node = self.head
+        while current_node:
+            yield current_node.value
+            current_node = current_node.next
+
     #
     # def __contains__(self, item):
     #     pass
