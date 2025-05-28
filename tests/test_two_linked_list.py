@@ -104,4 +104,24 @@ class TestReversedMethod:
     )
     def test_simple_case(self, base_list: list, two_linked_list: TwoLinkedList, expected: TwoLinkedList):
         assert TwoLinkedList(reversed(two_linked_list)) == expected, f"Ошибка при аргументе: {base_list}"
+
+
+class TestClear:
+    # pytest tests/test_two_linked_list.py::TestClear
+    @pytest.mark.parametrize(
+        "base_list, two_linked_list",
+        [
+            (base_list := [1, 2, 3, 4, 5], TwoLinkedList(base_list)),
+            (base_list := [1, 2, 3, 4], TwoLinkedList(base_list)),
+            (base_list := [1, 2], TwoLinkedList(base_list)),
+            (base_list := [1], TwoLinkedList(base_list)),
+            (base_list := [], TwoLinkedList(base_list)),
+            (base_list := [1, 2.0, "3", [4, 4.0], True], TwoLinkedList(base_list))
+        ]
+    )
+    def test_simple_case(self, base_list: list, two_linked_list: TwoLinkedList):
+        two_linked_list.clear()
+        assert two_linked_list.size() == 0, f"Ошибка при аргументе: {base_list}"
+
+
 # pytest tests/test_two_linked_list.py
