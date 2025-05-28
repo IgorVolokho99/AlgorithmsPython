@@ -283,9 +283,26 @@ class TwoLinkedList:
 
         return size
 
-    # def reverse(self):
-    #     pass
-    #
+    def reverse(self) -> None:
+        """Метод, который переворачивает список.
+
+        Examples:
+            >>> two_linked_list = TwoLinkedList([1, 2, 3, 4, 5])
+            >>> two_linked_list.reverse()
+            >>> for i in range(two_linked_list.size()):
+            ...     print(two_linked_list.get(i)) # -> 5 4 3 2 1
+
+        """
+        left, right = self.head, self.tail
+
+        left_index, right_index = 0, self.size() - 1
+
+        while left_index < right_index:
+            left.value, right.value = right.value, left.value
+            left, right = left.next, right.prev
+            left_index += 1
+            right_index -= 1
+
     # def clear(self):
     #     pass
     #

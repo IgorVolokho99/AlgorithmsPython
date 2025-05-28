@@ -3,16 +3,14 @@ from two_linked_list.two_linked_list import TwoLinkedList
 
 
 def main():
-    obj = TwoLinkedList()
+    obj = TwoLinkedList([1, 2, 3, 4, 5])
+    obj2 = TwoLinkedList([1, 2, 3, 4, 5][::-1])
+    obj.reverse()
 
-    obj.push_back(1)
-    obj.push_back(2)
-    obj.push_back(3)
+    print(obj == obj2)
 
-    obj.remove(4)
-
-    print(obj.head.value)
-    print(obj.head.next.value)
+    for i in range(obj.size()):
+        print(obj.get(i))
 
 
 if __name__ == "__main__":
