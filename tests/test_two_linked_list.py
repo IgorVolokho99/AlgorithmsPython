@@ -89,4 +89,19 @@ class TestReverseMethod:
         assert two_linked_list == expected, f"Ошибка при аргументе: {base_list}"
 
 
+class TestReversedMethod:
+    # pytest tests/test_two_linked_list.py::TestReversedMethod
+    @pytest.mark.parametrize(
+        "base_list, two_linked_list, expected",
+        [
+            (base_list := [1, 2, 3, 4, 5], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [1, 2, 3, 4], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [1, 2], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [1], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [1, 2, "3", [4, 5], True], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1]))
+        ]
+    )
+    def test_simple_case(self, base_list: list, two_linked_list: TwoLinkedList, expected: TwoLinkedList):
+        assert TwoLinkedList(reversed(two_linked_list)) == expected, f"Ошибка при аргументе: {base_list}"
 # pytest tests/test_two_linked_list.py
