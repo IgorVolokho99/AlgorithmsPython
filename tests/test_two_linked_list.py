@@ -69,3 +69,24 @@ class TestSet:
                           expected_exception: Type[E] | tuple[Type[E], ...]) -> None:
         with pytest.raises(expected_exception):
             two_linked_list.set(index, value)
+
+
+class TestReverseMethod:
+    # pytest tests/test_two_linked_list.py::TestReverseMethod
+    @pytest.mark.parametrize(
+        "base_list, two_linked_list, expected",
+        [
+            (base_list := [1, 2, 3, 4, 5], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [1, 2, 3, 4], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [5, 5, 5, 5, 5], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [1, 2], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [1], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1])),
+            (base_list := [], TwoLinkedList(base_list), TwoLinkedList(base_list[::-1]))
+        ]
+    )
+    def test_simple_case(self, base_list: list, two_linked_list: TwoLinkedList, expected: TwoLinkedList) -> None:
+        two_linked_list.reverse()
+        assert two_linked_list == expected, f"Ошибка при аргументе: {base_list}"
+
+
+# pytest tests/test_two_linked_list.py
