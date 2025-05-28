@@ -286,6 +286,8 @@ class TwoLinkedList:
     def reverse(self) -> None:
         """Метод, который переворачивает список.
 
+        Оценка сложности по времени: O(n);
+        Оценка сложности по памяти: O(1);
         Examples:
             >>> two_linked_list = TwoLinkedList([1, 2, 3, 4, 5])
             >>> two_linked_list.reverse()
