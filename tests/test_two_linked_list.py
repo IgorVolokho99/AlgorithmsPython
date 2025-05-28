@@ -119,9 +119,62 @@ class TestClear:
             (base_list := [1, 2.0, "3", [4, 4.0], True], TwoLinkedList(base_list))
         ]
     )
-    def test_simple_case(self, base_list: list, two_linked_list: TwoLinkedList):
+    def test_simple_case(self, base_list: list, two_linked_list: TwoLinkedList) -> None:
         two_linked_list.clear()
         assert two_linked_list.size() == 0, f"Ошибка при аргументе: {base_list}"
 
+
+class TestExtend:
+    # pytest tests/test_two_linked_list.py::TestExtend
+    @pytest.mark.parametrize(
+        "tll1, tll2, expected",
+        [
+            (TwoLinkedList([1, 2, 3]), TwoLinkedList([4, 5, 6]), TwoLinkedList([1, 2, 3, 4, 5, 6])),
+            (TwoLinkedList([]), TwoLinkedList([4, 5, 6]), TwoLinkedList([4, 5, 6])),
+            (TwoLinkedList([1, 2, 3]), TwoLinkedList([]), TwoLinkedList([1, 2, 3])),
+            (TwoLinkedList([1]), TwoLinkedList([2]), TwoLinkedList([1, 2])),
+            (TwoLinkedList([1]), TwoLinkedList([]), TwoLinkedList([1])),
+            (TwoLinkedList([]), TwoLinkedList([1]), TwoLinkedList([1])),
+            (TwoLinkedList(["Hello", 2, 3, 4, 5]), TwoLinkedList([2.0, [1, 2], True]),
+             TwoLinkedList(["Hello", 2, 3, 4, 5, 2.0, [1, 2], True])),
+
+        ]
+    )
+    def test_simple_case(self, tll1: TwoLinkedList, tll2: TwoLinkedList, expected: TwoLinkedList) -> None:
+        tll1.extend(tll2)
+        assert tll1 == expected
+
+
+class TestIter:
+    # pytest tests/test_two_linked_list.py::TestIter
+    @pytest.mark.parametrize(
+        "two_linked_list, expected",
+        [
+            (TwoLinkedList(base_list := [1, 2, 3, 4, 5]), base_list),
+            (TwoLinkedList(base_list := [1, 2, 3, 4]), base_list),
+            (TwoLinkedList(base_list := [1, 2]), base_list),
+            (TwoLinkedList(base_list := [1]), base_list),
+            (TwoLinkedList(base_list := []), base_list),
+            (TwoLinkedList(base_list := [1, "Hello", 2.0, [3, 4, 5], True]), base_list)
+        ]
+    )
+    def test_simple_case(self, two_linked_list: TwoLinkedList, expected: list) -> None:
+        assert [value for value in two_linked_list] == expected, f"Ошибка при аргументе: {expected}"
+
+
+class TestStr:
+    # pytest tests/test_two_linked_list.py::TestStr
+    @pytest.mark.parametrize(
+        "two_linked_list, expected",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), "[1, 2, 3, 4, 5]"),
+            (TwoLinkedList([1, 2, 3, 4]), "[1, 2, 3, 4]"),
+            (TwoLinkedList([1, 2]), "[1, 2]"),
+            (TwoLinkedList([1]), "[1]"),
+            (TwoLinkedList([]), "[]"),
+        ]
+    )
+    def test_simple_case(self, two_linked_list: TwoLinkedList, expected: str) -> None:
+        assert str(two_linked_list) == expected, f"Ошибка при аргументе: {expected}"
 
 # pytest tests/test_two_linked_list.py
