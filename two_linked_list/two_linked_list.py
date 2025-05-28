@@ -311,9 +311,26 @@ class TwoLinkedList:
         while self.head:
             self.pop_back()
 
-    # def extend(self):
-    #     pass
-    #
+    def extend(self, other: "TwoLinkedList") -> None:
+        """Присоединяет все элементы другого двусвязного списка к текущему списку.
+
+        Метод проходит по элементам переданного списка `other` от головы до хвоста
+        и добавляет каждый элемент в конец текущего списка.
+
+        Args:
+            other (TwoLinkedList): Другой двусвязный список, элементы которого нужно добавить.
+
+        Examples:
+            >>> tll1 = TwoLinkedList([1, 2, 3])
+            >>> tll2 = TwoLinkedList([4, 5, 6])
+            >>> print(tll2) # [1, 2, 3, 4, 5, 6]
+
+        """
+        current_node = other.head
+        while current_node:
+            self.push_back(current_node.value)
+            current_node = current_node.next
+
     # def __copy__(self):
     #     pass
     #
