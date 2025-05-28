@@ -306,9 +306,11 @@ class TwoLinkedList:
             left_index += 1
             right_index -= 1
 
-    # def clear(self):
-    #     pass
-    #
+    def clear(self) -> None:
+        """Метод, который выполняет очистку двухсвязного списка."""
+        while self.head:
+            self.pop_back()
+
     # def extend(self):
     #     pass
     #
