@@ -213,6 +213,8 @@ class TwoLinkedList:
             Any:  Значение, которое будет возвращено.
 
         """
+        if not isinstance(index, int):
+            raise TypeError("list indices must be integers or slices, not float")
         if index < 0:
             raise IndexError("List indexes must be positive integers")
 
@@ -476,9 +478,35 @@ class TwoLinkedList:
         """
         return True if self.find(value) != -1 else False
 
-    # def __getitem__(self, item):
-    #     pass
-    #
+    def __getitem__(self, index: int) -> Any:
+        """Магический метод, реализующий оператор взятия индекса [].
+
+        Args:
+            index: Индекс нужного элемента.
+
+        Returns:
+            Any: Значение узла по указанному индексу.
+
+        Raises:
+            TypeError: В случае, если получен index не типа данных int.
+            IndexError: В случае, если индекс является отрицательным целым числом или лежит вне имеющегося диапазона.
+
+        """
+        if not isinstance(index, int):
+            raise TypeError("list indices must be integers or slices, not float")
+        if index < 0:
+            raise ValueError("list indexes must be whole.")
+        current_node = self.head
+        current_index = 0
+        while current_index < index and current_node:
+            current_node = current_node.next
+            current_index += 1
+
+        if not current_node:
+            raise IndexError("List index out of range.")
+
+        return current_node.value
+
     # def __setitem__(self, key, value):
     #     pass
     #

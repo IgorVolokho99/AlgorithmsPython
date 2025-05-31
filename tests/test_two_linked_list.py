@@ -279,3 +279,31 @@ class TestBool:
     def test_with_false(self, base_list: list, two_linked_list: TwoLinkedList) -> None:
         assert not bool(two_linked_list), f"Ошибка при аргументе: {base_list}"
 
+
+class TestGetItem:
+    # pytest tests/test_two_linked_list.py::TestGetItem
+    @pytest.mark.parametrize(
+        "two_linked_list, index, expected",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), 3, 4),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 0, 1),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 4, 5),
+            (TwoLinkedList([1, "Hello", 3.0, [4], (5, )]), 3, [4]),
+        ]
+    )
+    def test_simple_args(self, two_linked_list: TwoLinkedList, index: int, expected: Any) -> None:
+        assert two_linked_list[index] == expected, \
+            f"Ошибка при индексе - {index}, ожидалось - {expected}, вернулось - {two_linked_list[index]}"
+
+    @pytest.mark.parametrize(
+        "two_linked_list, index, expected",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), 10, IndexError),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 5, IndexError),
+            (TwoLinkedList([1, 2, 3, 4, 5]), -1, ValueError),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 2.0, TypeError)
+        ]
+    )
+    def test_error_case(self, two_linked_list: TwoLinkedList, index: int, expected: E) -> None:
+        with pytest.raises(expected):
+            two_linked_list[index]
