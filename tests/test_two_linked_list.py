@@ -1,3 +1,4 @@
+import copy
 from typing import Any, TypeVar, Type
 
 import pytest
@@ -367,3 +368,20 @@ class TestDelItem:
     def test_error_case(self, two_linked_list: TwoLinkedList, remove_index: int, expected_error: E) -> None:
         with pytest.raises(expected_error):
             del two_linked_list[remove_index]
+
+
+class TestCopy:
+    # pytest tests/test_two_linked_list.py::TestCopy
+    @pytest.mark.parametrize(
+        "two_linked_list",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5])),
+            (TwoLinkedList([1])),
+            (TwoLinkedList([])),
+            (TwoLinkedList([1, 2.0, "Test", [1, 2, 3, 4, 5], True, (1, 2), {"Test": "Test"}]))
+        ]
+    )
+    def test_simple_case(self, two_linked_list: TwoLinkedList) -> None:
+        assert two_linked_list == copy.copy(two_linked_list), f"Ошибка при: {two_linked_list}"
+
+

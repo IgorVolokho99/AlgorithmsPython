@@ -339,9 +339,22 @@ class TwoLinkedList:
             self.push_back(current_node.value)
             current_node = current_node.next
 
-    # def __copy__(self):
-    #     pass
-    #
+    def __copy__(self) -> "TwoLinkedList":
+        """Магический метод, создающий поверхностную копию экземпляра класса.
+
+        Возвращает поверхностную копию экземпляра класса. Вызывается функцией copy модуля copy.
+
+        Returns:
+            TwoLinkedList: Поверхностная копия объекта.
+
+        """
+        new_object = TwoLinkedList()
+
+        for value in self:
+            new_object.push_back(value)
+
+        return new_object
+
     # def __deepcopy__(self, memodict={}):
     #     pass
     #

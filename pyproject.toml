@@ -48,7 +48,7 @@ target-version = "py310"
 select = [
     "F", "E", "C90", "N", "ANN", "B", "A", "COM", "C4", "DTZ", "T10", "PIE", "RET", "SLF", "ARG", "PL", "PT", "D", "DOC"
 ]
-ignore = ["ANN401", "ANN204"]
+ignore = ["ANN401"]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]

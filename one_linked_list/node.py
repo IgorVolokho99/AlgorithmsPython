@@ -6,7 +6,7 @@ from typing import Any
 class Node:
     """Класс, реализующий в себе логику узлов односвязного списка."""
 
-    def __init__(self, value: Any = None):
+    def __init__(self, value: Any = None) -> None:
         """Конструктор класса Node.
 
         :param value: Необязательный параметр value любого типа.

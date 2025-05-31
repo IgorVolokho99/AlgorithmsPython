@@ -9,7 +9,7 @@ from one_linked_list.node import Node
 class OneLinkedList:
     """Класс, реализующий односвязный список."""
 
-    def __init__(self, iterable: Optional[Iterable[Any]] = None):
+    def __init__(self, iterable: Optional[Iterable[Any]] = None) -> None:
         """Конструктор класса OneLinkedList.
 
         Принимает необязателньый аргумент node, который по умолчанию сохраняется в атрибуты head и tail.
@@ -306,7 +306,7 @@ class OneLinkedList:
         for item in other:
             self.push_back(item)
 
-    def __copy__(self):
+    def __copy__(self) -> "OneLinkedList":
         """Магический метод, создающий поверхностную копию экземпляра класса.
 
         Возвращает поверхностную копию экземпляра класса. Вызывается функцией copy модуля copy.
@@ -322,7 +322,7 @@ class OneLinkedList:
 
         return new_list
 
-    def __deepcopy__(self, memodict: dict = {}): # noqa: B006
+    def __deepcopy__(self, memodict: dict = {}) -> "OneLinkedList": # noqa: B006
         """Магический метод, создающий глубокую копию экземпляра класса.
 
         Возвращает глубокую копию экземпляра класса. Вызывается функцией copy модуля copy.
