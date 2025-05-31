@@ -207,3 +207,22 @@ class TestLen:
     )
     def test_simple_case(self, two_linked_list: TwoLinkedList, expected: str) -> None:
         assert len(two_linked_list) == expected, f"Ошибка при: {expected}"
+
+
+class TestAdd:
+    # pytest tests/test_two_linked_list.py::TestAdd
+    @pytest.mark.parametrize(
+        "first_tll, second_tll, expected_tll",
+        [
+            (TwoLinkedList([1, 2, 3]), TwoLinkedList([4, 5, 6]), TwoLinkedList([1, 2, 3, 4, 5, 6])),
+            (TwoLinkedList([1]), TwoLinkedList([4]), TwoLinkedList([1, 4])),
+            (TwoLinkedList([1]), TwoLinkedList([]), TwoLinkedList([1])),
+            (TwoLinkedList([]), TwoLinkedList([4]), TwoLinkedList([4])),
+            (TwoLinkedList([]), TwoLinkedList([]), TwoLinkedList([])),
+            (TwoLinkedList([1, 2.0, "Hello"]), TwoLinkedList([[1, 2], (3, 4), {"Test": 1}]),
+             TwoLinkedList([1, 2.0, "Hello", [1, 2], (3, 4), {"Test": 1}])),
+        ]
+    )
+    def test_simple_case(self, first_tll: TwoLinkedList, second_tll: TwoLinkedList,
+                         expected_tll: TwoLinkedList) -> None:
+        assert first_tll + second_tll == expected_tll, f"Ошибка при: {expected_tll}"

@@ -13,7 +13,7 @@ class TwoLinkedList:
         self.head = None
         self.tail = None
 
-        if Iterable:
+        if iterable:
             for item in iterable:
                 self.push_back(item)
 
@@ -362,11 +362,11 @@ class TwoLinkedList:
 
         obj = TwoLinkedList()
 
-        for item in self:
-            obj.push_back(item.value)
+        for value in self:
+            obj.push_back(value)
 
-        for item in other:
-            obj.push_back(item.value)
+        for value in other:
+            obj.push_back(value)
 
         return obj
 
