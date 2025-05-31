@@ -358,11 +358,19 @@ class TwoLinkedList:
         """
         return f"[{', '.join([str(value) for value in self])}]"
 
-    #
-    # def __repr__(self):
-    #     pass
+    def __repr__(self) -> str:
+        """Магический метод, возвращающий "официальное" представление экземпляра класса в виде строки.
 
-    def __eq__(self, other) -> bool:  # noqa: ANN001
+        Данный метод позволяет восстановить точную копию экземпляра при помощи функции eval и строки, возвращающейся
+        текущим методом.
+
+        Returns:
+            str: Официальное представление экземпляра класса.
+
+        """
+        return f"TwoLinkedList({str(self)})"
+
+    def __eq__(self, other: "TwoLinkedList") -> bool:  # noqa: ANN001
         """Сравнивает два объекта типа TwoLinkedList.
 
         Args:
