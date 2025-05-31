@@ -177,4 +177,19 @@ class TestStr:
     def test_simple_case(self, two_linked_list: TwoLinkedList, expected: str) -> None:
         assert str(two_linked_list) == expected, f"Ошибка при аргументе: {expected}"
 
+
 # pytest tests/test_two_linked_list.py
+
+
+class TestRepr:
+    # pytest tests/test_two_linked_list.py::TestRepr
+    @pytest.mark.parametrize(
+        "two_linked_list, expected",
+        [
+            (TwoLinkedList([1, 2]), "TwoLinkedList([1, 2])"),
+            (TwoLinkedList([1]), "TwoLinkedList([1])"),
+            (TwoLinkedList([]), "TwoLinkedList([])"),
+        ]
+    )
+    def test_simple_case(self, two_linked_list: TwoLinkedList, expected: str) -> None:
+        assert repr(two_linked_list) == expected, f"Ошибка при: {expected}"
