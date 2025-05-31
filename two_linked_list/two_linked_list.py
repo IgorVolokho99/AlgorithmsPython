@@ -535,9 +535,35 @@ class TwoLinkedList:
 
         current_node.value = value
 
-    # def __delitem__(self, key):
-    #     pass
-    #
+    def __delitem__(self, index: int) -> None:
+        """Магический метод, который имплементирует работу оператора del для удаления по индексу.
+
+        Args:
+            index(int): Индекс узла, который нужно удалить.
+
+        """
+        if not isinstance(index, int):
+            raise TypeError("List indexes must be int.")
+        if index < 0:
+            raise ValueError("List indexes must by whole.")
+
+        current_node = self.head
+        current_index = 0
+        while current_index < index and current_node:
+            current_node = current_node.next
+            current_index += 1
+
+        if current_node is None:
+            raise IndexError("List index out of range.")
+
+        if current_node is self.head:
+            self.pop_front()
+        elif current_node is self.tail:
+            self.pop_back()
+        else:
+            prev_node = current_node.prev
+            prev_node.next = current_node.next
+
     def __bool__(self) -> bool:
         """Магический метод булевых операций.
 

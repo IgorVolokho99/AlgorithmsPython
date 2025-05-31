@@ -288,7 +288,7 @@ class TestGetItem:
             (TwoLinkedList([1, 2, 3, 4, 5]), 3, 4),
             (TwoLinkedList([1, 2, 3, 4, 5]), 0, 1),
             (TwoLinkedList([1, 2, 3, 4, 5]), 4, 5),
-            (TwoLinkedList([1, "Hello", 3.0, [4], (5, )]), 3, [4]),
+            (TwoLinkedList([1, "Hello", 3.0, [4], (5,)]), 3, [4]),
         ]
     )
     def test_simple_args(self, two_linked_list: TwoLinkedList, index: int, expected: Any) -> None:
@@ -336,3 +336,34 @@ class TestSetItem:
     def test_error_case(self, two_linked_list: TwoLinkedList, index: int, new_value: Any, error: E) -> None:
         with pytest.raises(error):
             two_linked_list[index] = new_value
+
+
+class TestDelItem:
+    # pytest tests/test_two_linked_list.py::TestDelItem
+    @pytest.mark.parametrize(
+        "two_linked_list, remove_index, expected",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), 3, TwoLinkedList([1, 2, 3, 5])),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 0, TwoLinkedList([2, 3, 4, 5])),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 4, TwoLinkedList([1, 2, 3, 4])),
+            (TwoLinkedList([1, 2.0]), 0, TwoLinkedList([2.0])),
+            (TwoLinkedList([1, 2.0]), 1, TwoLinkedList([1])),
+            (TwoLinkedList([1]), 0, TwoLinkedList([])),
+        ]
+    )
+    def test_simple_case(self, two_linked_list: TwoLinkedList, remove_index: int, expected: TwoLinkedList) -> None:
+        del two_linked_list[remove_index]
+        assert two_linked_list == expected, f"Ошибка при: {remove_index}"
+
+    @pytest.mark.parametrize(
+        "two_linked_list, remove_index, expected_error",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), 2.0, TypeError),
+            (TwoLinkedList([1, 2, 3, 4, 5]), -1, ValueError),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 5, IndexError),
+            (TwoLinkedList([]), 1, IndexError)
+        ]
+    )
+    def test_error_case(self, two_linked_list: TwoLinkedList, remove_index: int, expected_error: E) -> None:
+        with pytest.raises(expected_error):
+            del two_linked_list[remove_index]
