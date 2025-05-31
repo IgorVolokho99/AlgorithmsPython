@@ -385,3 +385,28 @@ class TestCopy:
         assert two_linked_list == copy.copy(two_linked_list), f"Ошибка при: {two_linked_list}"
 
 
+class TestDeepCope:
+    # pytest tests/test_two_linked_list.py::TestDeepCope
+    @pytest.mark.parametrize(
+        "two_linked_list",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5])),
+            (TwoLinkedList([1])),
+            (TwoLinkedList([]))
+        ]
+    )
+    def test_simple_arguments(self, two_linked_list: TwoLinkedList) -> None:
+        assert two_linked_list == copy.deepcopy(two_linked_list)
+
+    @pytest.mark.parametrize(
+        "two_linked_list",
+        [
+            (TwoLinkedList([1, [1, 2, 3]])),
+            (TwoLinkedList([1, {"test": "test_2"}])),
+            (TwoLinkedList([1, TwoLinkedList([1, 2, 3])]))
+        ]
+    )
+    def test_difficult_objects(self, two_linked_list: TwoLinkedList) -> None:
+        copy_list = copy.deepcopy(two_linked_list)
+        assert two_linked_list[1] is not copy_list[1]
+

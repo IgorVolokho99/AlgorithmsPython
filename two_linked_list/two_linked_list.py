@@ -1,5 +1,5 @@
 """Модуль, который предоставляет реализацию стандартной структуры двухсвязного списка."""
-
+from copy import deepcopy
 from typing import Any, Optional, Iterable
 
 from two_linked_list.node import Node
@@ -355,9 +355,26 @@ class TwoLinkedList:
 
         return new_object
 
-    # def __deepcopy__(self, memodict={}):
-    #     pass
-    #
+    def __deepcopy__(self, memodict: dict = {}) -> "TwoLinkedList":  # noqa: B006
+        """Магический метод, создающий глубокую копию экземпляра класса.
+
+        Возвращает глубокую копию экземпляра класса. Вызывается функцией copy модуля copy.
+
+        Returns:
+            TwoLinkedList: Глубокая копия экземпляра класса.
+
+        """
+        if id(self) in memodict:
+            return memodict[id(self)]
+
+        new_object = TwoLinkedList()
+        memodict[id(self)] = new_object
+
+        for item in self:
+            new_object.push_back(deepcopy(item, memodict))
+
+        return new_object
+
     def __add__(self, other: "TwoLinkedList") -> "TwoLinkedList":
         """Метод, конкатенирующий два списка.
 

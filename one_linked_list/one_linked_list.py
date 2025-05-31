@@ -322,7 +322,7 @@ class OneLinkedList:
 
         return new_list
 
-    def __deepcopy__(self, memodict: dict = {}) -> "OneLinkedList": # noqa: B006
+    def __deepcopy__(self, memodict: dict = {}) -> "OneLinkedList":  # noqa: B006
         """Магический метод, создающий глубокую копию экземпляра класса.
 
         Возвращает глубокую копию экземпляра класса. Вызывается функцией copy модуля copy.
