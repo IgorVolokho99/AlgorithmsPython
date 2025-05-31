@@ -468,7 +468,7 @@ class TwoLinkedList:
         Реализован при помощи метода find.
 
         Args:
-            value[Any]: Искомое значение.
+            value(Any): Искомое значение.
 
         Returns:
             bool: True, если такой элемент присутствует в списке и False в противном случае.
@@ -485,5 +485,14 @@ class TwoLinkedList:
     # def __delitem__(self, key):
     #     pass
     #
-    # def __bool__(self):
-    #     pass
+    def __bool__(self) -> bool:
+        """Магический метод булевых операций.
+
+        Метод, который используется для функции bool и использования экземлпяров класса в булевых выражениях. Реализует
+        логику Truthy и Falsy значений.
+
+        Returns:
+            bool: True, если значение экземпляра является Truthy и False в противном случае.
+
+        """
+        return True if len(self) != 0 else False

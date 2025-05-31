@@ -254,3 +254,28 @@ class TestContains:
     )
     def test_simple_case_with_not_contain_element(self, two_linked_list: TwoLinkedList, needed_element: Any) -> None:
         assert needed_element not in two_linked_list, f"Ошибка при: {needed_element}"
+
+
+class TestBool:
+    # pytest tests/test_two_linked_list.py::TestBool
+    @pytest.mark.parametrize(
+        "base_list, two_linked_list",
+        [
+            (base_list := [1, 2, 3, 4, 5], TwoLinkedList(base_list)),
+            (base_list := [1, 2], TwoLinkedList(base_list)),
+            (base_list := [1], TwoLinkedList(base_list)),
+            (base_list := ["Hello", 2.0], TwoLinkedList(base_list))
+        ]
+    )
+    def test_with_true(self, base_list: list, two_linked_list: TwoLinkedList) -> None:
+        assert bool(two_linked_list), f"Ошибка при аргументе: {base_list}"
+
+    @pytest.mark.parametrize(
+        "base_list, two_linked_list",
+        [
+            (base_list := [], TwoLinkedList(base_list))
+        ]
+    )
+    def test_with_false(self, base_list: list, two_linked_list: TwoLinkedList) -> None:
+        assert not bool(two_linked_list), f"Ошибка при аргументе: {base_list}"
+
