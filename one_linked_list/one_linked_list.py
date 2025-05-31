@@ -342,7 +342,7 @@ class OneLinkedList:
 
         return new_list
 
-    def __add__(self, other):  # noqa: ANN001
+    def __add__(self, other: "OneLinkedList") -> "OneLinkedList":
         """Метод, конкатенирующий два односвязных списка.
 
         Returns:

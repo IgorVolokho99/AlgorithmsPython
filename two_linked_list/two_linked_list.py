@@ -8,7 +8,7 @@ from two_linked_list.node import Node
 class TwoLinkedList:
     """Класс, который предоставляет реализацию стандартной структуры двухсвязного списка."""
 
-    def __init__(self, iterable: Optional[Iterable[Any]]) -> None:
+    def __init__(self, iterable: Optional[Iterable[Any]] = None) -> None:
         """Инициализирует объекты данного класса, задаются два пустыл атрибута head и tail."""
         self.head = None
         self.tail = None
@@ -343,9 +343,33 @@ class TwoLinkedList:
     # def __deepcopy__(self, memodict={}):
     #     pass
     #
-    # def __add__(self, other):
-    #     pass
-    #
+    def __add__(self, other: "TwoLinkedList") -> "TwoLinkedList":
+        """Метод, конкатенирующий два списка.
+
+        Args:
+            other(TwoLinkedList): Список, с которым нужно произвести конкатенацию.
+
+        Returns:
+            TwoLinkedList: Односвязных список, в котором сначала идут все значения списка self, а потом все значения
+            списка other.
+
+        Raises:
+            TypeError: Если объект other не является экземпляром класса OneLinkedList.
+
+        """
+        if not isinstance(other, TwoLinkedList):
+            raise TypeError(f"unsupported operand type(s) for +: 'OneLinkedList' and {type(other)}")
+
+        obj = TwoLinkedList()
+
+        for item in self:
+            obj.push_back(item.value)
+
+        for item in other:
+            obj.push_back(item.value)
+
+        return obj
+
     def __len__(self) -> int:
         """Магический метод, который возвращает количество узлов в списке и имплементирует работу функции len.
 
