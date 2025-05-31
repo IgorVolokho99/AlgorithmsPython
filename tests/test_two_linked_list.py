@@ -307,3 +307,32 @@ class TestGetItem:
     def test_error_case(self, two_linked_list: TwoLinkedList, index: int, expected: E) -> None:
         with pytest.raises(expected):
             two_linked_list[index]
+
+
+class TestSetItem:
+    # pytest tests/test_two_linked_list.py::TestSetItem
+    @pytest.mark.parametrize(
+        "two_linked_list, index, new_value",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), 3, 10),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 0, 10),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 4, 10),
+            (TwoLinkedList([1, "Hello", [2.0, 3], (5, 5, 1), True]), 3, {"Test": "Test"})
+        ]
+    )
+    def test_simple_case(self, two_linked_list: TwoLinkedList, index: int, new_value: Any) -> None:
+        two_linked_list[index] = new_value
+        assert two_linked_list[index] == new_value, f"Ошибка при index={index}"
+
+    @pytest.mark.parametrize(
+        "two_linked_list, index, new_value, error",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), 10, 10, IndexError),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 5, 10, IndexError),
+            (TwoLinkedList([1, 2, 3, 4, 5]), -1, 10, ValueError),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 2.0, 10, TypeError)
+        ]
+    )
+    def test_error_case(self, two_linked_list: TwoLinkedList, index: int, new_value: Any, error: E) -> None:
+        with pytest.raises(error):
+            two_linked_list[index] = new_value

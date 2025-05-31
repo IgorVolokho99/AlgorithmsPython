@@ -507,9 +507,34 @@ class TwoLinkedList:
 
         return current_node.value
 
-    # def __setitem__(self, key, value):
-    #     pass
-    #
+    def __setitem__(self, index: int, value: Any) -> None:
+        """Магический метод, реализующий присваивание по индексу.
+
+        Args:
+            index: Индекс, по которому требуется выполнить присваивание.
+            value: Значение, которое будет сохранено в узел по указаному индексу.
+
+        Raises:
+            TypeError: В случае, если получен index не типа данных int.
+            IndexError: В случае, если индекс является отрицательным целым числом или лежит вне имеющегося диапазона.
+
+        """
+        if not isinstance(index, int):
+            raise TypeError("list indices must be integers or slices")
+        if index < 0:
+            raise ValueError("List indexes must be whole.")
+
+        current_node = self.head
+        current_index = 0
+        while current_index < index and current_node:
+            current_node = current_node.next
+            current_index += 1
+
+        if current_node is None:
+            raise IndexError("List index out of range.")
+
+        current_node.value = value
+
     # def __delitem__(self, key):
     #     pass
     #
