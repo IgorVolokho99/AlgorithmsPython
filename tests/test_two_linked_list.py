@@ -226,3 +226,31 @@ class TestAdd:
     def test_simple_case(self, first_tll: TwoLinkedList, second_tll: TwoLinkedList,
                          expected_tll: TwoLinkedList) -> None:
         assert first_tll + second_tll == expected_tll, f"Ошибка при: {expected_tll}"
+
+
+class TestContains:
+    # pytest tests/test_two_linked_list.py::TestContains
+    @pytest.mark.parametrize(
+        "two_linked_list, needed_element",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), 3),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 1),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 5),
+            (TwoLinkedList([1, 2, 3, 4, 5]), 5.0),
+            (TwoLinkedList([1, 2, 3, "Hello", 5]), "Hello"),
+            (TwoLinkedList([1]), 1)
+        ]
+    )
+    def test_simple_case_with_contain_element(self, two_linked_list: TwoLinkedList, needed_element: Any) -> None:
+        assert needed_element in two_linked_list, f"Ошибка при: {needed_element}"
+
+    @pytest.mark.parametrize(
+        "two_linked_list, needed_element",
+        [
+            (TwoLinkedList([1, 2, 3, 4, 5]), 6),
+            (TwoLinkedList([1, 2, 3, "Hello", 5]), "Hello!"),
+            (TwoLinkedList([1]), 2)
+        ]
+    )
+    def test_simple_case_with_not_contain_element(self, two_linked_list: TwoLinkedList, needed_element: Any) -> None:
+        assert needed_element not in two_linked_list, f"Ошибка при: {needed_element}"

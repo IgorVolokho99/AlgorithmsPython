@@ -191,11 +191,11 @@ class TwoLinkedList:
 
         current_node = self.head
         current_index = 0
-        while current_node.value != value:
+        while current_node and current_node.value != value:
             current_node = current_node.next
             current_index += 1
 
-        if current_node.value != value:
+        if not current_node or current_node.value != value:
             return -1
 
         return current_index
@@ -462,10 +462,9 @@ class TwoLinkedList:
             yield current_node.value
             current_node = current_node.next
 
-    #
-    # def __contains__(self, item):
-    #     pass
-    #
+    def __contains__(self, value: Any) -> bool:
+        return True if self.find(value) != -1 else False
+
     # def __getitem__(self, item):
     #     pass
     #
