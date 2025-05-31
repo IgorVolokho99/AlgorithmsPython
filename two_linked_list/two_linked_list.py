@@ -463,6 +463,17 @@ class TwoLinkedList:
             current_node = current_node.next
 
     def __contains__(self, value: Any) -> bool:
+        """Магический метод, проверяющий наличие значения value в списке.
+
+        Реализован при помощи метода find.
+
+        Args:
+            value[Any]: Искомое значение.
+
+        Returns:
+            bool: True, если такой элемент присутствует в списке и False в противном случае.
+
+        """
         return True if self.find(value) != -1 else False
 
     # def __getitem__(self, item):
