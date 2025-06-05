@@ -145,7 +145,7 @@ class TwoLinkedList:
         new_node.prev = prev_node
 
         new_node.next = next_node
-        new_node.prev = new_node
+        next_node.prev = new_node
 
     def remove(self, value: Any) -> None:
         """Метод, удаляющий первый узел со значение value из списка.

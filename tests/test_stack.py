@@ -66,3 +66,23 @@ class TestGetSize:
         for value in values:
             testing_stack.push(value)
         assert testing_stack.get_size() == len(values), f"Ошибка при: {values}"
+
+
+class TestLifoBehavior:
+    # pytest tests/test_stack.py::TestLifoBehavior
+    @pytest.mark.parametrize(
+        "value1, value2, value3",
+        [
+            (1, 2, 3),
+            (1.0, True, "Hello"),
+            ([1, 2, 3], {"Test": 1}, (1, ))
+        ]
+    )
+    def test_several_push_and_pop(self, value1: Any, value2: Any, value3: Any) -> None:
+        stack = Stack()
+        stack.push(value1)
+        stack.push(value2)
+        stack.push(value3)
+        assert stack.pop() == value3, f"Ошибка при первом удалении."
+        assert stack.pop() == value2, f"Ошибка при втором удалении."
+        assert stack.pop() == value1, f"Ошибка при третьем удалении."
