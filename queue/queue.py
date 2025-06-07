@@ -17,6 +17,9 @@ class Queue:
     def enqueue(self, value: Any) -> None:
         """Добавляет значение в конец очереди.
 
+        Оценка сложности по времени: O(1);
+        Оценка сложности по памяти: O(1);
+
         Args:
             value(Any): Объект любого типа, который будет добавлен в конец очереди.
 
@@ -34,8 +37,14 @@ class Queue:
     def dequeue(self) -> Any:
         """Удаляет и возвращает значение из начала очереди.
 
+        Оценка сложности по времени: O(1);
+        Оценка сложности по памяти: O(1);
+
         Returns:
             Any: Значение узла, который находится в начале очереди.
+
+        Raises:
+            IndexError: Бросается, если метод вызывается на пустой очереди.
 
         """
         if self._head is None:
@@ -43,17 +52,16 @@ class Queue:
 
         value = self._head.value
 
-        if self._size == 1:
-            self._head = self._tail = None
-        else:
-            self._head = self._head.next_node
+        self._head = self._head.next_node
+        if self._head is None:
+            self._tail = None
 
         self._size -= 1
 
         return value
 
     def get_size(self) -> int:
-        """Возвращает количество элементов в стеке.
+        """Возвращает количество элементов в очереди.
 
         Оценка сложности по времени: O(1);
         Оценка сложности по памяти: O(1);
@@ -63,3 +71,18 @@ class Queue:
 
         """
         return self._size
+
+    def peek(self) -> Any:
+        """Возвращает значение узла из начала очереди.
+
+        Returns:
+            Any: Значение, которое хранится в начале очереди.
+
+        Raises:
+            IndexError: Происходит, если запрашивается элемент из пустой очереди.
+
+        """
+        if self._head is None:
+            raise IndexError("Can not peep from empty queue.")
+
+        return self._head.value

@@ -1,4 +1,6 @@
 """Модуль, который содержит тесты для структуры queue."""
+from typing import Any
+
 import pytest
 
 from queue.queue import Queue
@@ -47,5 +49,29 @@ class TestEnqueueDequeue:
         testing_queue = Queue()
         with pytest.raises(IndexError):
             testing_queue.dequeue()
+
+
+class TestPeek:
+    # pytest tests/test_queue.py::TestPeek
+    @pytest.mark.parametrize(
+        "base_list, first_value",
+        [
+            ([1, 2, 3], 1),
+            ([1.0, 2], 1.0),
+            ([True], True),
+            (["1", 2.0, "Hello", True, [1, 2, 3], (1, 2), {"Test": "Hello"}], "1")
+        ]
+    )
+    def test_simple_case(self, base_list: list, first_value: Any) -> None:
+        testing_queue = Queue()
+        for value in base_list:
+            testing_queue.enqueue(value)
+        testing_queue.enqueue(first_value)
+        assert testing_queue.peek() == first_value, f"Последнее значение: {first_value}"
+
+    def test_peek_from_empty_list(self) -> None:
+        testing_queue = Queue()
+        with pytest.raises(IndexError):
+            testing_queue.peek()
 
 # pytest tests/test_queue.py --durations=0 --verbose
