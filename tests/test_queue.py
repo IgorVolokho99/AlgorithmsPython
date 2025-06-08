@@ -162,4 +162,23 @@ class TestBool:
         testing_queue.dequeue()
         assert testing_queue
 
+
+class TestStr:
+    # pytest tests/test_queue.py::TestStr --durations=0 --verbose
+    @pytest.mark.parametrize(
+        "base_list",
+        [
+            ([1, 2, 3, 4, 5]),
+            ([1, 2]),
+            ([1]),
+            ([])
+        ]
+    )
+    def test_simple_case(self, base_list: list) -> None:
+        testing_queue = Queue()
+        for value in base_list:
+            testing_queue.enqueue(value)
+
+        assert str(testing_queue) == f"Node({base_list})", f"Ошибка при аргументе: {base_list}"
+
 # pytest tests/test_queue.py --durations=0 --verbose

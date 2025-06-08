@@ -106,9 +106,25 @@ class Queue:
         return self.get_size()
 
     def __bool__(self) -> bool:
-        """Позволяет использовать экземпляры класса в bool выражениях:
+        """Позволяет использовать экземпляры класса в bool выражениях.
 
         Returns:
             bool: True, если экземпляр не пуст и False в противном случае.
+
         """
         return not self.is_empty()
+
+    def __str__(self) -> str:
+        """Магический метод, возвращаются строковую интерпертацию экземпляра класса.
+
+        Returns:
+            str: Строка вида Node([1, 2, 3]).
+
+        """
+        base_list = []
+        current_node = self._head
+        while current_node:
+            base_list.append(current_node.value)
+            current_node = current_node.next_node
+
+        return f"Node({base_list})"
