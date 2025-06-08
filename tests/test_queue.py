@@ -130,4 +130,36 @@ class TestLen:
         testing_queue = Queue()
         assert len(testing_queue) == 0, f"Ошибка при пустой очереди."
 
+
+class TestBool:
+    # pytest tests/test_queue.py::TestBool --durations=0 --verbose
+    def test_empty_queue(self) -> None:
+        testing_queue = Queue()
+        assert not testing_queue
+
+        testing_queue.enqueue(1)
+        testing_queue.dequeue()
+        assert not testing_queue
+
+        testing_queue.enqueue(1)
+        testing_queue.enqueue(2)
+        testing_queue.enqueue(3)
+        testing_queue.dequeue()
+        testing_queue.dequeue()
+        testing_queue.dequeue()
+
+        assert not testing_queue
+
+    def test_not_empty_queue(self) -> None:
+        testing_queue = Queue()
+
+        testing_queue.enqueue(1)
+        assert testing_queue
+
+        testing_queue.enqueue(1)
+        testing_queue.enqueue(2)
+        testing_queue.enqueue(3)
+        testing_queue.dequeue()
+        assert testing_queue
+
 # pytest tests/test_queue.py --durations=0 --verbose

@@ -104,3 +104,11 @@ class Queue:
 
         """
         return self.get_size()
+
+    def __bool__(self) -> bool:
+        """Позволяет использовать экземпляры класса в bool выражениях:
+
+        Returns:
+            bool: True, если экземпляр не пуст и False в противном случае.
+        """
+        return not self.is_empty()
