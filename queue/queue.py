@@ -95,3 +95,12 @@ class Queue:
 
         """
         return True if self.get_size() == 0 else False
+
+    def __len__(self) -> int:
+        """Магический метод, который возвращает количество элементов в очереди.
+
+        Returns:
+            int: Количество элементов в очереди.
+
+        """
+        return self.get_size()

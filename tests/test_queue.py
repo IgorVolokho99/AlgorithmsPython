@@ -106,4 +106,28 @@ class TestIsEmpty:
         testing_queue.dequeue()
         assert not testing_queue.is_empty()
 
+
+class TestLen:
+    # pytest tests/test_queue.py::TestLen --durations=0 --verbose
+    @pytest.mark.parametrize(
+        "base_list",
+        [
+            ([1, 2, 3]),
+            ([1, 2]),
+            ([1]),
+            ([]),
+            ([1, 2.0, "3", "hello World", True])
+        ]
+    )
+    def test_queue_with_values(self, base_list: list) -> None:
+        testing_queue = Queue()
+        for value in base_list:
+            testing_queue.enqueue(value)
+
+        assert len(testing_queue) == len(base_list), f"Ошибка при входном аргументе: {base_list}"
+
+    def test_empty_queue(self) -> None:
+        testing_queue = Queue()
+        assert len(testing_queue) == 0, f"Ошибка при пустой очереди."
+
 # pytest tests/test_queue.py --durations=0 --verbose
