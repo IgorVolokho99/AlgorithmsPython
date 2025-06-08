@@ -86,3 +86,12 @@ class Queue:
             raise IndexError("Can not peep from empty queue.")
 
         return self._head.value
+
+    def is_empty(self) -> bool:
+        """Возвращает True, если очередь пустая и False в противном случае.
+
+        Returns:
+            bool: Булевый литерал, который является флагом пустоты очереди.
+
+        """
+        return True if self.get_size() == 0 else False

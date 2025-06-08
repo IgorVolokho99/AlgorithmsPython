@@ -74,4 +74,36 @@ class TestPeek:
         with pytest.raises(IndexError):
             testing_queue.peek()
 
+
+class TestIsEmpty:
+    # pytest tests/test_queue.py::TestIsEmpty --durations=0 --verbose
+    def test_empty_queue(self) -> None:
+        testing_queue = Queue()
+        assert testing_queue.is_empty()
+
+        testing_queue.enqueue(1)
+        testing_queue.dequeue()
+        assert testing_queue.is_empty()
+
+        testing_queue.enqueue(1)
+        testing_queue.enqueue(2)
+        testing_queue.enqueue(3)
+        testing_queue.dequeue()
+        testing_queue.dequeue()
+        testing_queue.dequeue()
+
+        assert testing_queue.is_empty()
+
+    def test_not_empty_queue(self) -> None:
+        testing_queue = Queue()
+
+        testing_queue.enqueue(1)
+        assert not testing_queue.is_empty()
+
+        testing_queue.enqueue(1)
+        testing_queue.enqueue(2)
+        testing_queue.enqueue(3)
+        testing_queue.dequeue()
+        assert not testing_queue.is_empty()
+
 # pytest tests/test_queue.py --durations=0 --verbose
