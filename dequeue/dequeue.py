@@ -1,10 +1,12 @@
 """Модуль, содержащий реализацию двусторонней очереди(Dequeue)."""
-from typing import Iterable
+from typing import Iterable, Any, Iterator
 
 from dequeue.node import Node
 
 
-class Dequeue:
+class Deque:
+    """Реализация двусторонней очереди."""
+
     def __init__(self, iterable: Iterable, maxlen: int = None) -> None:
         """Инициализирует пустую двустороннюю очередь значениями итерируемого объекта и None для атрибута max_len.
 
@@ -29,9 +31,18 @@ class Dequeue:
 
             self._size += 1
 
-    # def append(self, value: Any) -> None:
-    #     pass
-    #
+    def __iter__(self) -> Iterator[Any]:
+        """Позволяет итерироваться по элементам дека от головы к хвосту.
+
+        Yields:
+            Any: Значения узлов, начиная от головы и до хвоста.
+
+        """
+        current_node = self._head
+        while current_node:
+            yield current_node.value
+            current_node = current_node.next
+
     # def append_left(self, value: Any) -> None:
     #     pass
     #
