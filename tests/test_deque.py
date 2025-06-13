@@ -52,9 +52,28 @@ class TestAppendLeft:
             (base_list := [1, 2.0, "Hello", [1, 2, 3], {"test": "test_1"}, (1, 2, 3), True], Deque(base_list), None),
         ]
     )
-    def test_simple_case(self, base_list: list, testing_deque: Deque, append_element: Any):
+    def test_simple_case(self, base_list: list, testing_deque: Deque, append_element: Any) -> None:
         testing_deque.append_left(append_element)
         base_list = [append_element] + base_list
         assert list(testing_deque) == base_list, f"Ошибка при: {append_element}"
 
+
+class TestPop:
+    # pytest tests/test_deque.py::TestPop
+    @pytest.mark.parametrize(
+        "base_list, testing_deque",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list)),
+            (base_list := [1, 2], Deque(base_list)),
+            (base_list := [1], Deque(base_list)),
+        ]
+    )
+    def test_simple_case(self, base_list: list, testing_deque: Deque) -> None:
+        assert base_list.pop() == testing_deque.pop(), f"Ошибка при: {base_list}"
+        assert base_list == list(testing_deque), f"Ошибка при: {base_list}"
+
+    def test_negative_case(self) -> None:
+        testing_deque = Deque([])
+        with pytest.raises(IndexError):
+            testing_deque.pop()
 # pytest tests/test_deque.py

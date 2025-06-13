@@ -73,10 +73,33 @@ class Deque:
             new_node.next = self._head
             self._head.prev = new_node
             self._head = new_node
+            self._size += 1
 
-    # def pop(self) -> Any:
-    #     pass
-    #
+    def pop(self) -> Any:
+        """Удаляет и возвращает последний элемент двусторонней очереди.
+
+        Returns:
+            Any: Значение последнего узла очереди.
+
+        Raises:
+            IndexError: Если попытка удалить элемент из пустой очереди.
+
+        """
+        if self._head is None:
+            raise IndexError("Can not pop from an empty list.")
+
+        if self._head is self._tail:
+            value = self._tail.value
+            self._head = self._tail = None
+            self._size -= 1
+            return value
+
+        value = self._tail.value
+        self._tail = self._tail.prev
+        self._tail.next = None
+        self._size -= 1
+        return value
+
     # def pop_left(self) -> Any:
     #     pass
     #
