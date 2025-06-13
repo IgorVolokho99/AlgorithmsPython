@@ -31,6 +31,22 @@ class Deque:
 
             self._size += 1
 
+    def append(self, value: Any) -> None:
+        """Добавляет элемент в конец очереди.
+
+        Args:
+            value(Any): Значение, которое будет сохранено в конечный узел.
+
+        """
+        if self._tail is None:
+            self._head = self._tail = Node(value)
+        else:
+            new_node = Node(value)
+            new_node.prev = self._tail
+            self._tail.next = new_node
+            self._tail = new_node
+        self._size += 1
+
     def __iter__(self) -> Iterator[Any]:
         """Позволяет итерироваться по элементам дека от головы к хвосту.
 
