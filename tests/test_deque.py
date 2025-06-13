@@ -1,4 +1,5 @@
 """Модуль, который содержит тесты для двусторонней очереди."""
+import copy
 from typing import Any
 
 import pytest
@@ -98,5 +99,20 @@ class TestPopLeft:
             testing_deque.pop()
 
 
+class TestCopy:
+    # pytest tests/test_deque.py::TestCopy
+    @pytest.mark.parametrize(
+        "testing_deque",
+        [
+            (Deque([1, 2, 3, 4, 5]),),
+            (Deque([1, 2]),),
+            (Deque([1]),),
+            (Deque([]),),
+            (Deque([1, 2.0, "Helo", [1, 2, 3], (1, 2, 3), {1, 2, 3}, {"test": "test"}, True, None]),),
+        ]
+    )
+    def test_simple_case(self, testing_deque: Deque) -> None:
+        copy_deque = copy.copy(testing_deque)
+        assert list(testing_deque) == list(copy_deque), f"Ошибка при: {testing_deque}"
 
-# pytest tests/test_deque.py
+        # pytest tests/test_deque.py

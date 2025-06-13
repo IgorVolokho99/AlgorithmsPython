@@ -125,9 +125,22 @@ class Deque:
         self._size -= 1
         return value
 
-    # def copy(self) -> "Dequeue":
-    #     pass
-    #
+    def __copy__(self) -> "Deque":
+        """Магический метод, создающий поверхностную копию экземпляра класса.
+
+        Возвращает поверхностную копию экземпляра класса. Вызывается функцией copy модуля copy.
+
+        Returns:
+            Deque: Поверхностная копия экземпляра класса.
+
+        """
+        new_obj = Deque([])
+
+        for value in self:
+            new_obj.append(value)
+
+        return new_obj
+
     # def clear(self) -> None:
     #     pass
     #
