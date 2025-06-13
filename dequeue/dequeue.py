@@ -100,9 +100,31 @@ class Deque:
         self._size -= 1
         return value
 
-    # def pop_left(self) -> Any:
-    #     pass
-    #
+    def pop_left(self) -> Any:
+        """Удаляет и возвращает первый элемент двусторонней очереди.
+
+        Returns:
+            Any: Значение первого узла очереди.
+
+        Raises:
+            IndexError: Если попытка удалить элемент из пустой очереди.
+
+        """
+        if self._head is None:
+            raise IndexError("Can not pop from an empty list.")
+
+        if self._head is self._tail:
+            value = self._head.value
+            self._head = self._tail = None
+            self._size -= 1
+            return value
+
+        value = self._head.value
+        self._head = self._head.next
+        self._head.prev = None
+        self._size -= 1
+        return value
+
     # def copy(self) -> "Dequeue":
     #     pass
     #
