@@ -1,4 +1,5 @@
 """Модуль, содержащий реализацию двусторонней очереди(Dequeue)."""
+import collections.abc
 from typing import Iterable, Any, Iterator
 
 from dequeue.node import Node
@@ -141,12 +142,27 @@ class Deque:
 
         return new_obj
 
-    # def clear(self) -> None:
-    #     pass
-    #
-    # def extend(self, iterable: Iterable) -> None:
-    #     pass
-    #
+    def clear(self) -> None:
+        """Очищает двустороннюю очередь."""
+        self._head = self._tail = None
+        self._size = 0
+
+    def extend(self, iterable: Iterable) -> None:
+        """Добавляет по очереди все элементы итерируемой коллекции в конец двусторонней очереди.
+
+        Args:
+            iterable: Коллекция, элементы которой будут добавлены в очередь.
+
+        Raises:
+            TypeError: Если переданный объект не является итерируемым.
+
+        """
+        if not isinstance(iterable, collections.abc.Iterable):
+            raise TypeError("Argument must be an iterable object")
+
+        for value in iterable:
+            self.append(value)
+
     # def extend_left(self, iterable: Iterable) -> None:
     #     pass
     #

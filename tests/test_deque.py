@@ -104,15 +104,79 @@ class TestCopy:
     @pytest.mark.parametrize(
         "testing_deque",
         [
-            (Deque([1, 2, 3, 4, 5]),),
-            (Deque([1, 2]),),
-            (Deque([1]),),
-            (Deque([]),),
-            (Deque([1, 2.0, "Helo", [1, 2, 3], (1, 2, 3), {1, 2, 3}, {"test": "test"}, True, None]),),
+            Deque([1, 2, 3, 4, 5]),
+            Deque([1, 2]),
+            Deque([1]),
+            Deque([]),
+            Deque([1, 2.0, "Helo", [1, 2, 3], (1, 2, 3), {1, 2, 3}, {"test": "test"}, True, None])
         ]
     )
     def test_simple_case(self, testing_deque: Deque) -> None:
         copy_deque = copy.copy(testing_deque)
         assert list(testing_deque) == list(copy_deque), f"Ошибка при: {testing_deque}"
 
-        # pytest tests/test_deque.py
+
+class TestClear:
+    # pytest tests/test_deque.py::TestClear
+    @pytest.mark.parametrize(
+        "testing_deque",
+        [
+            Deque([1, 2, 3, 4, 5]),
+            Deque([1, 2]),
+            Deque([1]),
+            Deque([]),
+            Deque([1, 2.0, "Helo", [1, 2, 3], (1, 2, 3), {1, 2, 3}, {"test": "test"}, True, None]),
+        ]
+    )
+    def test_simple_case(self, testing_deque: Deque) -> None:
+        print(testing_deque)
+        testing_deque.clear()
+        assert list(testing_deque) == [], f"Ошибка при: {list(testing_deque)}"
+
+
+class TestExtend:
+    # pytest tests/test_deque.py::TestExtend
+    @pytest.mark.parametrize(
+        "base_list, extend_list",
+        [
+            ([1, 2, 3], [4, 5]),
+            ([1], [4]),
+            ([1], []),
+            ([], [1]),
+        ]
+    )
+    def test_extend_deque(self, base_list: list, extend_list: list) -> None:
+        testing_deque = Deque(base_list)
+        extend_deque = Deque(extend_list)
+        testing_deque.extend(extend_deque)
+        assert list(testing_deque) == base_list + extend_list, f"Ошибка при: {base_list} и {extend_list}"
+
+    @pytest.mark.parametrize(
+        "base_list, extend_object",
+        [
+            ([1, 2, 3], [4, 5]),
+            ([1], (1, 2, 3)),
+            ([1], {1, 2, 3}),
+        ]
+    )
+    def test_extend_iterable_object(self, base_list: list, extend_object: Any) -> None:
+        testing_deque = Deque(base_list)
+        testing_deque.extend(extend_object)
+        assert list(testing_deque) == base_list + list(extend_object), f"Ошибка при: {base_list} и {extend_object}"
+
+    @pytest.mark.parametrize(
+        "base_list, extend_object",
+        [
+            ([1, 2, 3], 1),
+            ([1], True),
+            ([1], 2.0),
+            ([], None),
+        ]
+    )
+    def test_negative_object(self, base_list: list, extend_object: Any) -> None:
+        testing_deque = Deque(base_list)
+        with pytest.raises(TypeError):
+            testing_deque.extend(extend_object)
+
+
+# pytest tests/test_deque.py
