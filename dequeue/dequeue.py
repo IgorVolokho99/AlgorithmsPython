@@ -59,9 +59,21 @@ class Deque:
             yield current_node.value
             current_node = current_node.next
 
-    # def append_left(self, value: Any) -> None:
-    #     pass
-    #
+    def append_left(self, value: Any) -> None:
+        """Добавляет элемент в начало очереди.
+
+        Args:
+            value(Any): Значение, которое будет сохранено в конечный узел.
+
+        """
+        if self._head is None:
+            self._head = self._tail = Node(value)
+        else:
+            new_node = Node(value)
+            new_node.next = self._head
+            self._head.prev = new_node
+            self._head = new_node
+
     # def pop(self) -> Any:
     #     pass
     #
