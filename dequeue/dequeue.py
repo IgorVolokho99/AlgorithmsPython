@@ -141,9 +141,11 @@ class Deque:
 
         return new_obj
 
-    # def clear(self) -> None:
-    #     pass
-    #
+    def clear(self) -> None:
+        """Очищает двустороннюю очередь."""
+        self._head = self._tail = None
+        self._size = 0
+
     # def extend(self, iterable: Iterable) -> None:
     #     pass
     #
