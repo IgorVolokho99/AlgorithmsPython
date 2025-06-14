@@ -302,4 +302,26 @@ class TestCount:
     def test_simple_case(self, testing_deque: Deque, needed_value: Any, expected: int) -> None:
         assert testing_deque.count(needed_value) == expected, f"Ошибка при: {needed_value}"
 
+
+class TestRemove:
+    # pytest tests/test_deque.py::TestRemove
+    @pytest.mark.parametrize(
+        "base_list, testing_deque, remove_element",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 3),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 1),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 5),
+            (base_list := [1], Deque(base_list), 1)
+        ]
+    )
+    def test_simple_case(self, base_list: list, testing_deque: Deque, remove_element: Any) -> None:
+        testing_deque.remove(remove_element)
+        base_list.remove(remove_element)
+        assert list(testing_deque) == base_list, f"Ошибка при: {base_list} и {remove_element}"
+
+    def test_negative_case(self) -> None:
+        testing_deque = Deque([1, 2, 3, 4, 5])
+        with pytest.raises(ValueError):
+            testing_deque.remove(10)
+
 # pytest tests/test_deque.py

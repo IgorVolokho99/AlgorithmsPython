@@ -241,8 +241,36 @@ class Deque:
     # def reverse(self) -> None:
     #     pass
     #
-    # def remove(self, value: Any) -> None:
-    #     pass  # Will check
-    #
+    def remove(self, value: Any) -> None:
+        """Удаляет первое слева вхождения значения value в очереди..
+
+        Args:
+            value(Any): Значение, которое будет удалено.
+
+        Raises:
+            ValueError: При отсуствии указанного значения в очереди.
+
+        """
+        current_node = self._head
+        while current_node:
+            if current_node.value == value:
+                break
+            current_node = current_node.next
+
+        if current_node is None:
+            raise ValueError("deque.remove(x): x not in deque")
+
+        if current_node is self._head:
+            self.pop_left()
+        elif current_node is self._tail:
+            self.pop()
+        else:
+            prev_node = current_node.prev
+            next_node = current_node.next
+            prev_node.next = next_node
+            next_node.prev = prev_node
+
+        self._size -= 1
+
     # def insert(self, value: Any, pos: index) -> None:
     #     pass  # Will check
