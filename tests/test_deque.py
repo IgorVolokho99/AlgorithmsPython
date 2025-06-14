@@ -283,4 +283,23 @@ class TestIndex:
         with pytest.raises(expected_error):
             testing_deque.index(needed_value, start=start, end=end)
 
+
+class TestCount:
+    # pytest tests/test_deque.py::TestCount
+    @pytest.mark.parametrize(
+        "testing_deque, needed_value, expected",
+        [
+            (Deque([1, 2, 3, 4, 5]), 3, 1),
+            (Deque([1, 2, 3, 4, 5]), 1, 1),
+            (Deque([1, 2, 3, 4, 5]), 5, 1),
+            (Deque([1, 2, 3, 1]), 1, 2),
+            (Deque([1, 1]), 1, 2),
+            (Deque([1]), 1, 1),
+            (Deque([]), 1, 0),
+            (Deque([1, 2.0, "Hello", [1, 2, 3]]), "By", 0)
+        ]
+    )
+    def test_simple_case(self, testing_deque: Deque, needed_value: Any, expected: int) -> None:
+        assert testing_deque.count(needed_value) == expected, f"Ошибка при: {needed_value}"
+
 # pytest tests/test_deque.py

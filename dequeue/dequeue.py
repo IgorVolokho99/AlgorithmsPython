@@ -194,6 +194,7 @@ class Deque:
             TypeError: Если start или end не являются целыми числами;
             ValueError: Если значение не найдено;
             IndexError: Если start или end выходят за границы.
+
         """
         if start is None:
             start = 0
@@ -218,9 +219,22 @@ class Deque:
 
         raise ValueError(f"{needed_value} is not in list")
 
-    # def count(self, value: Any) -> int:
-    #     pass  # Will check
-    #
+    def count(self, needed_value: Any) -> int:
+        """Подсчитывает количество вхождений value в очередь.
+
+        Args:
+            needed_value(Any): Искомое значение для подсчета.
+
+        Returns:
+            int: Количество вхождение value в очередь.
+
+        """
+        counter = 0
+        for current_value in self:
+            if current_value == needed_value:
+                counter += 1
+        return counter
+
     # def rotate(self, n: int) -> None:
     #     pass  # Will check
     #
