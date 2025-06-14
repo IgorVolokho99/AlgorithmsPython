@@ -179,4 +179,51 @@ class TestExtend:
             testing_deque.extend(extend_object)
 
 
+class TestExtendLeft:
+    # pytest tests/test_deque.py::TestExtendLeft
+    @pytest.mark.parametrize(
+        "base_list, extend_list",
+        [
+            ([1, 2, 3], [4, 5]),
+            ([1], [4]),
+            ([1], []),
+            ([], [1]),
+        ]
+    )
+    def test_extend_deque(self, base_list: list, extend_list: list) -> None:
+        testing_deque = Deque(base_list)
+        extend_deque = Deque(extend_list)
+        testing_deque.extend_left(extend_deque)
+        assert list(testing_deque) == extend_list + base_list, f"Ошибка при: {base_list} и {extend_list}"
+
+    @pytest.mark.parametrize(
+        "base_list, extend_object",
+        [
+            ([1, 2, 3], [4, 5]),
+            ([1], (1, 2, 3)),
+            ([1], {1, 2, 3}),
+        ]
+    )
+    def test_extend_iterable_object(self, base_list: list, extend_object: Any) -> None:
+        testing_deque = Deque(base_list)
+        testing_deque.extend_left(extend_object)
+        assert list(testing_deque) == list(extend_object) + base_list, f"Ошибка при: {base_list} и {extend_object}"
+
+    @pytest.mark.parametrize(
+        "base_list, extend_object",
+        [
+            ([1, 2, 3], 1),
+            ([1], True),
+            ([1], 2.0),
+            ([], None),
+        ]
+    )
+    def test_negative_object(self, base_list: list, extend_object: Any) -> None:
+        testing_deque = Deque(base_list)
+        with pytest.raises(TypeError):
+            testing_deque.extend_left(extend_object)
+
+
+
+
 # pytest tests/test_deque.py

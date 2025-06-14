@@ -163,9 +163,22 @@ class Deque:
         for value in iterable:
             self.append(value)
 
-    # def extend_left(self, iterable: Iterable) -> None:
-    #     pass
-    #
+    def extend_left(self, iterable: Iterable) -> None:
+        """Добавляет по очереди все элементы итерируемой коллекции в начала двусторонней очереди.
+
+        Args:
+            iterable: Коллекция, элементы которой будут добавлены в очередь.
+
+        Raises:
+            TypeError: Если переданный объект не является итерируемым.
+
+        """
+        if not isinstance(iterable, collections.abc.Iterable):
+            raise TypeError("Argument must be an iterable object")
+
+        for value in reversed(list(iterable)):
+            self.append_left(value)
+
     # def index(self, value: Any) -> int:
     #     pass  # Will check signature of implemantation stadart dequeue from collections
     #
