@@ -1,4 +1,5 @@
 """Модуль, содержащий реализацию двусторонней очереди(Dequeue)."""
+import collections
 from typing import Iterable, Any, Iterator
 
 from dequeue.node import Node
