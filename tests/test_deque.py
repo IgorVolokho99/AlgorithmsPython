@@ -1,10 +1,12 @@
 """Модуль, который содержит тесты для двусторонней очереди."""
 import copy
-from typing import Any
+from typing import Any, TypeVar
 
 import pytest
 
 from dequeue.dequeue import Deque
+
+E = TypeVar("E", bound=Exception)
 
 
 class TestIter:
@@ -224,6 +226,61 @@ class TestExtendLeft:
             testing_deque.extend_left(extend_object)
 
 
+class TestIndex:
+    # pytest tests/test_deque.py::TestIndex
 
+    @pytest.mark.parametrize(
+        "base_list, testing_deque, needed_pos, needed_value",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 2, 3),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 0, 1),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 4, 5),
+            (base_list := [1], Deque(base_list), 0, 1),
+        ]
+    )
+    def test_simple_case(self, base_list: list, testing_deque: Deque, needed_pos: int, needed_value: Any) -> None:
+        assert testing_deque.index(needed_value) == needed_pos, f"Ошибка при: value = {needed_value}"
+
+    @pytest.mark.parametrize(
+        "base_list, testing_deque, needed_pos, needed_value, start, end",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 2, 3, 1, 4),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 1, 2, 1, 4),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 3, 4, 1, 4)
+        ]
+    )
+    def test_with_start_end(self, base_list: list, testing_deque: Deque, needed_pos: int, needed_value: Any, start: int,
+                            end: int) -> None:
+        assert testing_deque.index(needed_value, start=start,
+                                   end=end) == needed_pos, f"Ошибка при: value = {needed_value}"
+
+    @pytest.mark.parametrize(
+        "base_list, testing_deque, needed_value",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10)
+        ]
+    )
+    def test_negative_case_not_in_list(self, base_list: list, testing_deque: Deque, needed_value: Any) -> None:
+        with pytest.raises(ValueError):
+            testing_deque.index(needed_value)
+
+    @pytest.mark.parametrize(
+        "base_list, testing_deque, needed_value, start, end, expected_error",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, 1.0, 2.5, TypeError),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, 1, 2.5, TypeError),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, [1, 2], 10, TypeError),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, -10, -10, ValueError),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, -5, 2, ValueError),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, 2, -10, ValueError),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, 10, 15, IndexError),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, 1, 15, IndexError),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, 15, 1, IndexError)
+        ]
+    )
+    def test_negative_case_invalid_start_stop(self, base_list: list, testing_deque: Deque, needed_value: Any,
+                                              start: Any, end: Any, expected_error: E) -> None:
+        with pytest.raises(expected_error):
+            testing_deque.index(needed_value, start=start, end=end)
 
 # pytest tests/test_deque.py

@@ -179,9 +179,45 @@ class Deque:
         for value in reversed(list(iterable)):
             self.append_left(value)
 
-    # def index(self, value: Any) -> int:
-    #     pass  # Will check signature of implemantation stadart dequeue from collections
-    #
+    def index(self, needed_value: Any, start: int = None, end: int = None) -> int:
+        """Возвращает индекс первого вхождения указанного значения в пределах диапазона.
+
+        Args:
+            needed_value (Any): Искомое значение;
+            start (int): Индекс, с которого начинается поиск (по умолчанию 0);
+            end (int): Индекс, до которого ведётся поиск (по умолчанию — конец очереди).
+
+        Returns:
+            int: Индекс первого найденного элемента.
+
+        Raises:
+            TypeError: Если start или end не являются целыми числами;
+            ValueError: Если значение не найдено;
+            IndexError: Если start или end выходят за границы.
+        """
+        if start is None:
+            start = 0
+        if end is None:
+            end = self._size
+
+        if not isinstance(start, int):
+            raise TypeError(f"List index must be integer, not {type(start)}")
+
+        if not isinstance(end, int):
+            raise TypeError(f"List index must be integer, not {type(end)}")
+
+        if start < 0 or end < 0:
+            raise ValueError("List index must be whole.")
+
+        if start > self._size or end > self._size:
+            raise IndexError("List index out of range.")
+
+        for i, current_value in enumerate(list(self)[start:end], start=start):
+            if current_value == needed_value:
+                return i
+
+        raise ValueError(f"{needed_value} is not in list")
+
     # def count(self, value: Any) -> int:
     #     pass  # Will check
     #
