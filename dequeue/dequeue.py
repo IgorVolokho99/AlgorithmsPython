@@ -235,9 +235,43 @@ class Deque:
                 counter += 1
         return counter
 
-    # def rotate(self, n: int) -> None:
-    #     pass  # Will check
-    #
+    def rotate(self, n: int) -> None:
+        """Делает циклический сдвиг двусторонней очереди.
+
+        Args:
+            n (int): Количество сдвигов. Если n > 0 — сдвиг вправо, если n < 0 — влево.
+
+        Raises:
+            TypeError: Если n не является целым числом.
+
+        """
+        if not isinstance(n, int) or isinstance(n, bool):
+            raise TypeError("n must be integer.")
+
+        if self._size == 0 or n == 0:
+            return
+
+        n = n % self._size
+        if n == 0:
+            return
+
+        steps = self._size - n if n > 0 else abs(n)
+        split_point = self._head
+        for _ in range(steps):
+            split_point = split_point.next
+
+        new_head = split_point
+        new_tail = split_point.prev
+
+        self._tail.next = self._head
+        self._head.prev = self._tail
+
+        new_head.prev = None
+        new_tail.next = None
+
+        self._head = new_head
+        self._tail = new_tail
+
     def reverse(self) -> None:
         """Переворачивает двустороннюю очередь."""
         current_node = self._tail
@@ -282,6 +316,3 @@ class Deque:
             next_node.prev = prev_node
 
         self._size -= 1
-
-    # def insert(self, value: Any, pos: index) -> None:
-    #     pass  # Will check

@@ -341,4 +341,67 @@ class TestReverse:
         testing_deque.reverse()
         assert list(testing_deque) == base_list[::-1], f"Ошибка при аргументе: {base_list}"
 
+
+class TestRotate:
+    # pytest tests/test_deque.py::TestRotate
+    @pytest.mark.parametrize(
+        "base_list, testing_deque, n, expected",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 2, [4, 5, 1, 2, 3]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 5, [1, 2, 3, 4, 5]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 1, [5, 1, 2, 3, 4]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 0, [1, 2, 3, 4, 5]),
+            (base_list := [1, 2], Deque(base_list), 1, [2, 1]),
+            (base_list := [1], Deque(base_list), 1, [1]),
+            (base_list := [1], Deque(base_list), 0, [1]),
+        ]
+    )
+    def test_simple_rotate_to_right(self, base_list: list, testing_deque: Deque, n: int, expected: list) -> None:
+        testing_deque.rotate(n)
+        assert list(testing_deque) == expected, f"Ошибка при аргументах: {base_list} и {n} получили {list(testing_deque)}"
+
+    @pytest.mark.parametrize(
+        "base_list, testing_deque, n, expected",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), -2, [3, 4, 5, 1, 2]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), -5, [1, 2, 3, 4, 5]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), -1, [2, 3, 4, 5, 1]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 0, [1, 2, 3, 4, 5]),
+            (base_list := [1, 2], Deque(base_list), -1, [2, 1]),
+            (base_list := [1], Deque(base_list), -1, [1]),
+            (base_list := [1], Deque(base_list), 0, [1]),
+        ]
+    )
+    def test_simple_rotate_to_left(self, base_list: list, testing_deque: Deque, n: int, expected: list) -> None:
+        testing_deque.rotate(n)
+        assert list(testing_deque) == expected, f"Ошибка при аргументах: {base_list} и {n}"
+
+    @pytest.mark.parametrize(
+        "base_list, testing_deque, n, expected",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 6, [5, 1, 2, 3, 4]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 10, [1, 2, 3, 4, 5]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), 7, [4, 5, 1, 2, 3]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), -7, [3, 4, 5, 1, 2]),
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list), -10, [1, 2, 3, 4, 5]),
+        ]
+    )
+    def test_simple_rotate_biggest_then_size(self, base_list: list, testing_deque: Deque, n: int,
+                                             expected: list) -> None:
+        testing_deque.rotate(n)
+        assert list(testing_deque) == expected, f"Ошибка при аргументах: {base_list} и {n}"
+
+    @pytest.mark.parametrize(
+        "testing_deque, invalid_n, expected_error",
+        [
+            (Deque([1, 2, 3, 4, 5]), 5.0, TypeError),
+            (Deque([1, 2, 3, 4, 5]), True, TypeError),
+            (Deque([1, 2, 3, 4, 5]), [1, 2, 3], TypeError),
+            (Deque([1, 2, 3, 4, 5]), None, TypeError),
+        ]
+    )
+    def test_invalid_argument(self, testing_deque: Deque, invalid_n: int, expected_error: E) -> None:
+        with pytest.raises(expected_error):
+            testing_deque.rotate(invalid_n)
+
 # pytest tests/test_deque.py
