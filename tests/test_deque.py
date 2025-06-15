@@ -324,4 +324,21 @@ class TestRemove:
         with pytest.raises(ValueError):
             testing_deque.remove(10)
 
+
+class TestReverse:
+    # pytest tests/test_deque.py::TestReverse
+    @pytest.mark.parametrize(
+        "base_list, testing_deque",
+        [
+            (base_list := [1, 2, 3, 4, 5], Deque(base_list)),
+            (base_list := [1, 2], Deque(base_list)),
+            (base_list := [1], Deque(base_list)),
+            (base_list := [], Deque(base_list)),
+            (base_list := [1, 2.0, "3.5", [1, 2, 3], (1, 2, 3), {1, 2, 3}, {"test": "test"}, True], Deque(base_list))
+        ]
+    )
+    def test_simple_case(self, base_list: list, testing_deque: Deque) -> None:
+        testing_deque.reverse()
+        assert list(testing_deque) == base_list[::-1], f"Ошибка при аргументе: {base_list}"
+
 # pytest tests/test_deque.py

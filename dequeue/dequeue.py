@@ -238,9 +238,20 @@ class Deque:
     # def rotate(self, n: int) -> None:
     #     pass  # Will check
     #
-    # def reverse(self) -> None:
-    #     pass
-    #
+    def reverse(self) -> None:
+        """Переворачивает двустороннюю очередь."""
+        current_node = self._tail
+        next_node = None
+
+        while current_node:
+            prev_node = current_node.prev
+            current_node.prev = next_node
+            current_node.next = prev_node
+            next_node = current_node
+            current_node = prev_node
+
+        self._head, self._tail = self._tail, self._head
+
     def remove(self, value: Any) -> None:
         """Удаляет первое слева вхождения значения value в очереди..
 
