@@ -1,13 +1,16 @@
 """Модуль, содержащий реализацию двоичной кучи(max-binary-heap)."""
 import math
+from typing import Iterable
 
 
 class Heap:
     """Реализация двоичной кучи."""
 
-    def __init__(self) -> None:
+    def __init__(self, arr: Iterable) -> None:
         """Инициализирует кучу пустым массивом."""
         self._data = []
+        for item in arr:
+            self.push(item)
 
     def push(self, number: int) -> None:
         """Добавляет число в кучу.
@@ -51,7 +54,7 @@ class Heap:
         return return_value
 
     def _heapify_down(self, index: int) -> None:
-        """Проводит "хипизацию" кучи, после добавления нового элемента.
+        """Проводит "хипизацию" кучи, после удаления корня.
 
         Элемент под указанным индексом опускается вниз, покаместь не будет выполнено основное свойство кучи.
 

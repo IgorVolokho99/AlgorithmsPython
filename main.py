@@ -1,17 +1,14 @@
-import copy
-
-from one_linked_list.one_linked_list import OneLinkedList
-from two_linked_list.two_linked_list import TwoLinkedList
-from collections import deque
+from max_heap import Heap
 
 
 def main():
-    obj = TwoLinkedList([1, 2, 3, 4, 5])
-    print(copy.copy(obj))
-    d = deque([1, 2, 3, 4, 5])
+    max_heap = Heap([5, 2, 10, 51, 1, 2])
 
-    print(d.popleft())
-    print(d)
+    print(max_heap.depth())
+    print(max_heap.peek())
+    print(max_heap.peek())
+    print(max_heap.pop())
+    print(max_heap.peek())
 
 
 if __name__ == "__main__":
