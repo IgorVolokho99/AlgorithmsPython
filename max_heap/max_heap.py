@@ -117,3 +117,11 @@ class Heap:
 
         """
         return len(self._data)
+
+    def __bool__(self) -> bool:
+        """Магический метод, которые используется для приведения объекта в True или False.
+
+        Returns:
+            bool: True, если объект не пуст и False в противном случае.
+        """
+        return len(self) != 0
