@@ -10,7 +10,35 @@ class Heap:
         """Инициализирует кучу пустым массивом."""
         self._data = []
         for item in arr:
-            self.push(item)
+            self._data.append(item)
+        self.build_heap()
+
+    def build_heap(self) -> None:
+        """Оптимальный алгоритм формирования кучи из списка."""
+        for i in range(len(self._data) // 2 - 1, -1, -1):
+            self.sift_down(i)
+
+    def sift_down(self, index: int) -> None:
+        """Выполняет просеивание элемента вниз для восстановления свойства кучи поддерева с корнем в позиции index.
+
+        Args:
+            index(int) : индекс элемента, который будет отправлен вниз.
+
+        """
+        while 2 * index + 1 < len(self._data):
+            left = 2 * index + 1
+            right = 2 * index + 2
+
+            biggest = left
+
+            if right < len(self._data) and self._data[right] > self._data[left]:
+                biggest = right
+
+            if self._data[index] >= self._data[biggest]:
+                break
+
+            self._data[index], self._data[biggest] = self._data[biggest], self._data[index]
+            index = biggest
 
     def push(self, number: int) -> None:
         """Добавляет число в кучу.
@@ -126,5 +154,6 @@ class Heap:
 
         Returns:
             bool: True, если объект не пуст и False в противном случае.
+
         """
         return len(self) != 0
